@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>超分体验 — Alaya Token</title>
+  <meta name="description" content="Alaya Token 超分单独体验：上传视频，体验超分前后对比，并查看计费价格。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Noto+Sans+SC:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body class="enhance-page upscale-exp-page">
+  <div class="page-glow" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="logo" href="index.html">
+      <span class="logo-mark" aria-hidden="true"></span>
+      Alaya Token
+    </a>
+    <nav class="header-nav" aria-label="主导航">
+      <a href="video.html">视频工作台</a>
+      <a href="enhance.html">提示词增强</a>
+      <a class="btn btn-primary" href="index.html#login">登录</a>
+    </nav>
+  </header>
+
+  <main class="enhance-main">
+    <div class="enhance-hero">
+      <a class="back-link" href="video.html">← 返回工作台</a>
+      <p class="section-label">Video Upscale</p>
+      <h1>超分体验</h1>
+      <p class="enhance-lead">上传待处理视频，选择目标分辨率与时长，体验超分结果，并对比超分前后画质。</p>
+      <div class="enhance-fee-pill" id="feePillWrap" hidden>本环节计费 <strong id="feePill">¥0.00</strong>（按时长 × 分辨率单价）</div>
+    </div>
+
+    <section class="upscale-workspace">
+      <div class="enhance-editor">
+        <div class="field">
+          <label>上传视频</label>
+          <div class="upload-drop" id="uploadDrop">
+            <input type="file" id="videoInput" accept="video/*" hidden />
+            <div class="upload-drop-inner" id="uploadIdle">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0l-4 4m4-4l4 4"/><path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
+              <strong>点击或拖拽上传视频</strong>
+              <p>支持 MP4 / WebM / MOV，建议 4–60 秒</p>
+              <button type="button" class="btn btn-ghost" id="pickVideo">选择文件</button>
+            </div>
+            <div class="upload-file-meta" id="uploadMeta" hidden>
+              <strong id="fileName">未选择文件</strong>
+              <span id="fileInfo">—</span>
+              <button type="button" class="btn btn-ghost" id="replaceVideo">更换视频</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-row">
+          <div class="field">
+            <label>目标分辨率</label>
+            <div class="chip-row" id="resolutionChips" role="group" aria-label="目标分辨率">
+              <button type="button" class="chip" data-resolution="480p">480p</button>
+              <button type="button" class="chip active" data-resolution="720p">720p</button>
+              <button type="button" class="chip" data-resolution="1080p">1080p</button>
+            </div>
+          </div>
+          <div class="field">
+            <label for="durationRange">计费时长 <em id="durationLabel">8s</em></label>
+            <input type="range" id="durationRange" min="4" max="60" step="1" value="8" />
+          </div>
+        </div>
+
+        <div class="cost-card gen-cost-card" id="upscaleCostCard" aria-live="polite" hidden>
+          <div class="cost-card-head">
+            <span>超分费用</span>
+            <strong id="upscaleCostTotal">¥0.00</strong>
+          </div>
+          <div class="cost-breakdown">
+            <div class="cost-line"><span>单价</span><em id="upscaleUnit">¥0.04 / 秒</em></div>
+            <div class="cost-line"><span>时长</span><em id="upscaleSeconds">8s</em></div>
+            <div class="cost-line"><span>分辨率系数</span><em id="upscaleResFactor">720p · ×1.00</em></div>
+          </div>
+          <p class="cost-note">本页仅计超分费用，不含提示词增强与视频生成</p>
+        </div>
+
+        <div class="enhance-actions">
+          <button type="button" class="btn btn-primary" id="runUpscale">
+            开始超分
+            <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
+          </button>
+          <button type="button" class="btn btn-ghost" id="applyToStudio">带回工作台</button>
+        </div>
+        <p class="enhance-status" id="upscaleStatus">待命 · 请先上传视频</p>
+      </div>
+
+      <div class="upscale-preview-panel">
+        <div class="preview-toolbar">
+          <h2>超分结果</h2>
+          <span class="status-pill ready" id="statusPill">
+            <span class="dot" aria-hidden="true"></span>
+            <span id="statusText">待命</span>
+          </span>
+        </div>
+        <div class="upscale-result-stage">
+          <div class="upscale-video-frame" id="resultFrame">
+            <div class="preview-placeholder" id="resultPlaceholder">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M10 9l5 3-5 3V9z"/></svg>
+              <p>上传视频并开始超分后，结果将在此展示。</p>
+            </div>
+            <video id="resultVideo" class="upscale-video is-after" controls playsinline hidden></video>
+            <div class="gen-progress" id="genProgress">
+              <div class="bar" id="genBar"></div>
+            </div>
+          </div>
+        </div>
+        <div class="gen-side-meta">
+          <div>
+            <span>源文件</span>
+            <strong id="metaFile">未上传</strong>
+          </div>
+          <div>
+            <span>目标分辨率</span>
+            <strong id="metaRes">720p</strong>
+          </div>
+          <div id="metaFeeWrap" hidden>
+            <span>本环节费用</span>
+            <strong id="metaFee">¥0.00</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="compare-section" aria-labelledby="upscale-compare-title">
+      <div class="compare-head">
+        <h2 id="upscale-compare-title">超分前后视频对比</h2>
+        <p>左侧为上传原片，右侧为超分后结果；可分别播放查看清晰度差异。</p>
+      </div>
+      <div class="upscale-compare-grid">
+        <article class="upscale-compare-card">
+          <div class="compare-badge">超分前</div>
+          <div class="upscale-video-frame is-before">
+            <div class="preview-placeholder" id="beforePlaceholder">
+              <p>上传视频后在此预览原片</p>
+            </div>
+            <video id="beforeVideo" class="upscale-video is-before" controls playsinline hidden></video>
+          </div>
+          <ul class="compare-points">
+            <li>细节偏软，边缘不够锐利</li>
+            <li>纹理与噪点控制一般</li>
+            <li>适合作为超分输入源</li>
+          </ul>
+        </article>
+        <article class="upscale-compare-card is-after">
+          <div class="compare-badge after">超分后</div>
+          <div class="upscale-video-frame is-after">
+            <div class="preview-placeholder" id="afterPlaceholder">
+              <p>完成超分后展示增强画质</p>
+            </div>
+            <video id="afterVideo" class="upscale-video is-after" controls playsinline hidden></video>
+          </div>
+          <ul class="compare-points">
+            <li>清晰度与边缘更干净</li>
+            <li>细节纹理更可读</li>
+            <li>更适合成片导出</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="billing-section" aria-labelledby="upscale-billing-title">
+      <div class="compare-head">
+        <h2 id="upscale-billing-title">计费规则</h2>
+        <p>超分按秒计费，费用 = 超分单价 × 时长 × 分辨率系数。</p>
+      </div>
+      <div class="billing-panel" aria-label="超分计费规则">
+        <div class="billing-panel-head">
+          <h3>视频超分</h3>
+          <span>按秒</span>
+        </div>
+        <div class="billing-table-wrap">
+          <table class="billing-table">
+            <thead>
+              <tr>
+                <th>计费方式</th>
+                <th>计算公式</th>
+                <th>基准单价（720p）</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>按秒</td>
+                <td>超分单价 × 时长 × 分辨率系数</td>
+                <td>¥0.04 / 秒</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="billing-estimate" id="billingEstimate" hidden>
+          <div class="billing-estimate-title">
+            <strong>当前参数预估</strong>
+            <em id="estimateTotal">¥0.00</em>
+          </div>
+          <div class="billing-estimate-rows">
+            <div><span>时长</span><em id="estSeconds">8s</em></div>
+            <div><span>分辨率</span><em id="estRes">720p</em></div>
+            <div><span>单价</span><em id="estUnit">¥0.04 / 秒</em></div>
+            <div><span>系数</span><em id="estFactor">×1.00</em></div>
+          </div>
+          <p class="billing-estimate-note">上传视频后按实际时长与分辨率估算；切换至 1080p 后费用随系数上浮。实际以调用时长为准。</p>
+        </div>
+        <p class="billing-estimate-note" id="billingEstimateIdle">上传视频后展示当前参数的超分预估费用。</p>
+      </div>
+    </section>
+
+    <section class="plans-section" aria-labelledby="plans-title">
+      <div class="compare-head">
+        <h2 id="plans-title">组合套餐</h2>
+        <p>个人版按费用充值、按消耗扣费；团队版提供含视频模型额度的席位套餐。</p>
+      </div>
+
+      <div class="plans-split">
+        <article class="plans-block is-personal" aria-labelledby="personal-plan-title">
+          <div class="personal-topup" id="personalTopup">
+            <div class="personal-topup-head">
+              <h3 id="personal-plan-title">Alaya 个人版 · 费用充值</h3>
+              <ul>
+                <li>消耗调用额度，模型灵活切换，个人适用更方便</li>
+                <li>账号仅针对单个账号使用</li>
+              </ul>
+            </div>
+            <div class="billing-table-wrap personal-topup-table-wrap">
+              <table class="billing-table personal-topup-table">
+                <thead>
+                  <tr>
+                    <th>充值范围</th>
+                    <th>对应费用</th>
+                    <th>适配模型</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="topup-amount-list" id="topupAmounts" role="group" aria-label="充值金额">
+                        <button type="button" class="topup-amount active" data-amount="10">10</button>
+                        <button type="button" class="topup-amount" data-amount="50">50</button>
+                        <button type="button" class="topup-amount" data-amount="100">100</button>
+                        <button type="button" class="topup-amount" data-amount="1000">1000</button>
+                        <button type="button" class="topup-amount" data-amount="2000">2000</button>
+                        <button type="button" class="topup-amount" data-amount="5000">5000</button>
+                        <button type="button" class="topup-amount" data-amount="custom">自定义</button>
+                      </div>
+                      <div class="topup-custom" id="topupCustom" hidden>
+                        <label for="topupCustomInput">自定义金额（元）</label>
+                        <input id="topupCustomInput" type="number" min="1" step="1" placeholder="请输入金额" />
+                      </div>
+                    </td>
+                    <td class="topup-merged">基于消耗直接扣费，充多少扣多少</td>
+                    <td class="topup-merged">所有模型</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="billing-estimate-note" id="topupSummary">已选充值 ¥10 · 按调用消耗扣减，适配全部模型</p>
+            <a class="btn btn-primary plans-inline-buy" id="buyPersonal" href="index.html#login">
+              去购买 · 个人版
+              <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="plans-block is-team" aria-labelledby="team-plan-title">
+          <div class="team-plans-head">
+            <h3 id="team-plan-title">Alaya 团队版 · 视频席位套餐</h3>
+            <p>仅含视频模型额度的 Standard / Pro，覆盖提示词增强、视频生成与超分。</p>
+          </div>
+          <div class="plans-grid" id="plansGrid"></div>
+          <a class="btn btn-primary plans-inline-buy" id="buyTeam" href="index.html#login">
+            去购买 · 团队版
+            <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
+          </a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>© DataCanvas 九章云极 · Video Upscale</span>
+    <div class="footer-links">
+      <a href="video.html">视频工作台</a>
+      <a href="enhance.html">提示词增强</a>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script src="assets/js/plans.js"></script>
+  <script src="assets/js/upscale.js"></script>
+</body>
+</html>

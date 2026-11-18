@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>视频生成工作台 — Alaya Token</title>
+  <meta name="description" content="Alaya Token 视频大模型体验工作台：提示词生成、风格与画幅控制、灵感案例展示。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Noto+Sans+SC:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body class="studio-page">
+  <div class="page-glow" aria-hidden="true"></div>
+  <header class="site-header studio-header">
+    <a class="logo" href="index.html">
+      <span class="logo-mark" aria-hidden="true"></span>
+      <span>Alaya Token</span>
+    </a>
+    <nav class="header-nav" aria-label="主导航">
+      <a href="index.html">首页</a>
+      <a href="models.html">模型</a>
+      <a href="#cases">案例</a>
+      <a class="btn btn-primary" href="index.html#login">
+        登录
+        <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
+      </a>
+    </nav>
+  </header>
+
+  <section class="model-banner" id="modelBanner" data-theme="video" aria-label="当前模型产品介绍">
+    <div class="model-banner-bg" aria-hidden="true"></div>
+    <div class="model-banner-inner">
+      <div class="model-banner-copy">
+        <div class="model-banner-kicker">
+          <span class="model-banner-series">Alaya Video Series</span>
+          <span class="model-banner-chip" id="bannerBlurb">通用文生视频</span>
+        </div>
+        <p class="model-banner-eyebrow" id="bannerEyebrow">Product Spotlight</p>
+        <h2 id="bannerModelName">Alaya Video</h2>
+        <p class="model-banner-tagline" id="bannerTagline">一款为成片可控而生的通用视频生成产品</p>
+        <p class="model-banner-desc" id="bannerModelDesc">均衡画质与可控性，适合多数成片场景，作为工作台默认视频模型。</p>
+        <ul class="model-banner-features" id="bannerFeatures"></ul>
+        <div class="model-banner-stats" id="bannerStats"></div>
+        <div class="model-banner-actions">
+          <a class="btn btn-primary" href="#studioWorkbench">开始创作</a>
+          <a class="btn btn-ghost model-banner-ghost" href="#cases">查看场景成片</a>
+          <span class="model-banner-meta" id="bannerVersion">alaya-t2v-1</span>
+        </div>
+      </div>
+
+      <div class="model-banner-visual" aria-hidden="true">
+        <div class="banner-frame">
+          <div class="banner-frame-glow"></div>
+          <div class="banner-stage" id="bannerStage">
+            <div class="banner-shot">
+              <span class="banner-shot-motif"></span>
+              <span class="banner-shot-scan"></span>
+            </div>
+            <div class="banner-hud">
+              <em id="bannerHudLabel">T2V</em>
+              <strong id="bannerHudRes">720p · 16:9</strong>
+            </div>
+            <div class="banner-float-card banner-float-a">
+              <span>镜头</span>
+              <strong id="bannerFloatA">稳态跟拍</strong>
+            </div>
+            <div class="banner-float-card banner-float-b">
+              <span>光影</span>
+              <strong id="bannerFloatB">均衡可控</strong>
+            </div>
+          </div>
+          <div class="banner-filmstrip">
+            <i></i><i></i><i></i><i></i><i></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="studio-workbench" id="studioWorkbench" aria-label="视频生成工作台">
+    <div class="studio-workbench-head">
+      <div>
+        <p class="section-label">Creation Desk</p>
+        <h1 class="studio-workbench-title">视频生成工作台</h1>
+      </div>
+      <div class="model-picker" id="modelPicker">
+        <button
+          type="button"
+          class="model-picker-trigger"
+          id="modelPickerBtn"
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          aria-controls="modelPickerMenu"
+        >
+          <span class="model-picker-icon" aria-hidden="true"></span>
+          <span class="model-picker-meta">
+            <em>当前模型</em>
+            <strong id="currentModelName">Alaya Video</strong>
+            <span id="currentModelVer">alaya-t2v-1 · 通用文生视频</span>
+          </span>
+          <svg class="model-picker-chevron" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 9l6 6 6-6"/>
+          </svg>
+        </button>
+        <div class="model-picker-menu" id="modelPickerMenu" role="listbox" hidden aria-label="切换视频模型"></div>
+      </div>
+    </div>
+
+    <div class="studio-layout">
+      <aside class="studio-panel" aria-label="生成控制">
+        <div class="panel-block">
+          <div class="panel-block-head">
+            <h2>提示词</h2>
+            <p>描述画面与约束，决定成片内容方向</p>
+          </div>
+          <div class="field">
+            <label for="prompt">正向提示词</label>
+            <textarea id="prompt" placeholder="描述画面、镜头运动、光影与氛围。例如：雨夜霓虹街道，镜头缓慢推进，电影感光影……"></textarea>
+          </div>
+          <div class="field">
+            <label for="negative">负向提示词</label>
+            <textarea id="negative" class="neg" placeholder="不想出现的元素：模糊、变形、水印、低清晰度……"></textarea>
+          </div>
+        </div>
+
+        <div class="panel-block">
+          <div class="panel-block-head">
+            <h2>成片参数</h2>
+            <p>风格、画幅、时长与分辨率</p>
+          </div>
+          <div class="field">
+            <label>风格</label>
+            <div class="chip-row" id="styleChips" role="group" aria-label="风格选择">
+              <button type="button" class="chip active" data-style="写实电影">写实电影</button>
+              <button type="button" class="chip" data-style="动漫">动漫</button>
+              <button type="button" class="chip" data-style="三维渲染">三维渲染</button>
+              <button type="button" class="chip" data-style="赛博朋克">赛博朋克</button>
+              <button type="button" class="chip" data-style="水墨意境">水墨意境</button>
+            </div>
+          </div>
+          <div class="field">
+            <label>画幅比例</label>
+            <div class="ratio-grid" id="ratioGrid" role="group" aria-label="画幅比例">
+              <button type="button" class="ratio-btn active" data-ratio="16:9" aria-pressed="true">
+                <span class="box"></span>16:9
+              </button>
+              <button type="button" class="ratio-btn" data-ratio="9:16" aria-pressed="false">
+                <span class="box"></span>9:16
+              </button>
+              <button type="button" class="ratio-btn" data-ratio="1:1" aria-pressed="false">
+                <span class="box"></span>1:1
+              </button>
+              <button type="button" class="ratio-btn" data-ratio="4:3" aria-pressed="false">
+                <span class="box"></span>4:3
+              </button>
+            </div>
+          </div>
+          <div class="param-row">
+            <div class="field">
+              <label>生成时长</label>
+              <div class="chip-row" id="durationChips" role="group" aria-label="生成时长">
+                <button type="button" class="chip" data-seconds="4">4s</button>
+                <button type="button" class="chip" data-seconds="6">6s</button>
+                <button type="button" class="chip active" data-seconds="8">8s</button>
+                <button type="button" class="chip" data-seconds="10">10s</button>
+                <button type="button" class="chip" data-seconds="12">12s</button>
+                <button type="button" class="chip" data-seconds="15">15s</button>
+                <button type="button" class="chip" data-seconds="16">16s</button>
+              </div>
+            </div>
+            <div class="field">
+              <label>分辨率</label>
+              <div class="chip-row" id="resolutionChips" role="group" aria-label="分辨率">
+                <button type="button" class="chip" data-resolution="480p">480p</button>
+                <button type="button" class="chip active" data-resolution="720p">720p</button>
+                <button type="button" class="chip" data-resolution="1080p">1080p</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel-block">
+          <div class="panel-block-head">
+            <h2>流程环节</h2>
+            <p>可单独体验，或勾选后一键串联</p>
+          </div>
+          <div class="pipeline-list" id="pipelineList" aria-label="计费环节">
+            <article class="pipe-card" data-step="enhance">
+              <label class="pipe-check">
+                <input type="checkbox" id="chkEnhance" checked />
+                <span class="pipe-check-ui" aria-hidden="true"></span>
+              </label>
+              <div class="pipe-body">
+                <div class="pipe-top">
+                  <h3>提示词增强</h3>
+                  <strong class="pipe-price" id="priceEnhance" hidden>—</strong>
+                </div>
+                <p>优化镜头语言、光影与负向约束</p>
+                <button type="button" class="btn btn-ghost pipe-run" data-run="enhance">单独体验</button>
+              </div>
+            </article>
+            <article class="pipe-card" data-step="upscale">
+              <label class="pipe-check">
+                <input type="checkbox" id="chkUpscale" checked />
+                <span class="pipe-check-ui" aria-hidden="true"></span>
+              </label>
+              <div class="pipe-body">
+                <div class="pipe-top">
+                  <h3>超分</h3>
+                  <strong class="pipe-price" id="priceUpscale" hidden>—</strong>
+                </div>
+                <p>提升清晰度与细节，适合成片导出</p>
+                <button type="button" class="btn btn-ghost pipe-run" data-run="upscale">单独体验</button>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <button type="button" class="btn btn-primary generate-btn" id="generateBtn">
+          一键全流程体验
+          <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
+        </button>
+      </aside>
+
+      <section class="studio-preview" aria-label="预览区">
+        <div class="preview-toolbar">
+          <div class="preview-toolbar-left">
+            <h2>成片预览</h2>
+            <p>实时查看生成状态与结果表现</p>
+          </div>
+          <div class="preview-toolbar-right">
+            <span class="cost-chip" id="previewCostChip" hidden>预估 ¥0.00</span>
+            <span class="status-pill ready" id="statusPill">
+              <span class="dot" aria-hidden="true"></span>
+              <span id="statusText">待命</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="preview-stage">
+          <div class="preview-frame" id="previewFrame">
+            <div class="preview-placeholder" id="previewPlaceholder">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M10 9l5 3-5 3V9z"/></svg>
+              <p>选择下方场景实例，或填写提示词后开始体验</p>
+            </div>
+            <div class="preview-result" id="previewResult" aria-live="polite">
+              <div class="preview-visual" id="previewVisual" aria-hidden="true"></div>
+              <div class="preview-caption">
+                <div class="pipe-progress" id="pipeProgress" hidden>
+                  <span data-p="enhance">增强</span>
+                  <span data-p="generate">生成</span>
+                  <span data-p="upscale">超分</span>
+                </div>
+                <p class="scene" id="resultScene"></p>
+                <p class="meta" id="resultMeta"></p>
+                <p class="preview-cost-line" id="resultCost"></p>
+              </div>
+            </div>
+            <div class="gen-progress" id="genProgress">
+              <div class="bar" id="genBar"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-cost-slot">
+          <div class="cost-card preview-cost-card" id="costCard" aria-live="polite" hidden>
+            <div class="cost-card-head">
+              <span id="costHeadLabel">预估合计</span>
+              <strong id="costTotal">¥0.00</strong>
+            </div>
+            <div class="cost-breakdown" id="costBreakdown"></div>
+            <p class="cost-note" id="costNote">选择场景实例或完成一次体验后展示预估费用</p>
+          </div>
+          <p class="preview-cost-placeholder" id="costPlaceholder">选择场景或完成体验后，预估费用将显示在这里</p>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <section class="cases-section" id="cases" aria-labelledby="cases-title">
+    <div class="cases-head cases-head-simple">
+      <p class="section-label">Scene Library</p>
+      <h2 class="section-title" id="cases-title">场景实例视频</h2>
+      <p class="cases-lead">点击实例即可填入提示词、风格与画幅，快速预览成片效果。</p>
+    </div>
+
+    <div class="cases-rail-wrap">
+      <button type="button" class="rail-nav rail-nav-prev" id="railPrev" aria-label="上一个场景">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+      </button>
+      <div class="cases-rail" id="casesGrid" tabindex="0" aria-label="左右滑动选择场景实例"></div>
+      <button type="button" class="rail-nav rail-nav-next" id="railNext" aria-label="下一个场景">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <section class="studio-commerce" aria-label="计费与套餐">
+    <section class="model-billing-section" aria-labelledby="model-billing-title">
+      <div class="compare-head">
+        <p class="section-label">Pricing Logic</p>
+        <h2 id="model-billing-title">计费方式</h2>
+        <p id="modelBillingLead">当前模型的分环节计费规则，切换模型后自动更新。</p>
+      </div>
+      <div class="billing-panel model-billing-panel" id="modelBillingPanel" aria-live="polite"></div>
+    </section>
+
+    <section class="plans-section" aria-labelledby="plans-title">
+      <div class="compare-head">
+        <p class="section-label">Plans</p>
+        <h2 id="plans-title">组合套餐</h2>
+        <p>个人版按费用充值、按消耗扣费；团队版提供含视频模型额度的席位套餐。</p>
+      </div>
+
+      <div class="plans-split">
+        <article class="plans-block is-personal" aria-labelledby="personal-plan-title">
+          <div class="personal-topup" id="personalTopup">
+            <div class="personal-topup-head">
+              <h3 id="personal-plan-title">Alaya 个人版 · 费用充值</h3>
+              <ul>
+                <li>消耗调用额度，模型灵活切换，个人适用更方便</li>
+                <li>账号仅针对单个账号使用</li>
+              </ul>
+            </div>
+            <div class="billing-table-wrap personal-topup-table-wrap">
+              <table class="billing-table personal-topup-table">
+                <thead>
+                  <tr>
+                    <th>充值范围</th>
+                    <th>对应费用</th>
+                    <th>适配模型</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="topup-amount-list" id="topupAmounts" role="group" aria-label="充值金额">
+                        <button type="button" class="topup-amount active" data-amount="10">10</button>
+                        <button type="button" class="topup-amount" data-amount="50">50</button>
+                        <button type="button" class="topup-amount" data-amount="100">100</button>
+                        <button type="button" class="topup-amount" data-amount="1000">1000</button>
+                        <button type="button" class="topup-amount" data-amount="2000">2000</button>
+                        <button type="button" class="topup-amount" data-amount="5000">5000</button>
+                        <button type="button" class="topup-amount" data-amount="custom">自定义</button>
+                      </div>
+                      <div class="topup-custom" id="topupCustom" hidden>
+                        <label for="topupCustomInput">自定义金额（元）</label>
+                        <input id="topupCustomInput" type="number" min="1" step="1" placeholder="请输入金额" />
+                      </div>
+                    </td>
+                    <td class="topup-merged">基于消耗直接扣费，充多少扣多少</td>
+                    <td class="topup-merged">所有模型</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="billing-estimate-note" id="topupSummary">已选充值 ¥10 · 按调用消耗扣减，适配全部模型</p>
+            <a class="btn btn-primary plans-inline-buy" id="buyPersonal" href="index.html#login">
+              去购买 · 个人版
+              <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="plans-block is-team" aria-labelledby="team-plan-title">
+          <div class="team-plans-head">
+            <h3 id="team-plan-title">Alaya 团队版 · 视频席位套餐</h3>
+            <p>仅含视频模型额度的 Standard / Pro，覆盖提示词增强、视频生成与超分。</p>
+          </div>
+          <div class="plans-grid" id="plansGrid"></div>
+          <a class="btn btn-primary plans-inline-buy" id="buyTeam" href="index.html#login">
+            去购买 · 团队版
+            <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
+          </a>
+        </article>
+      </div>
+    </section>
+  </section>
+
+  <footer class="site-footer">
+    <span>© DataCanvas 九章云极 · Alaya Token Video Studio</span>
+    <div class="footer-links">
+      <a href="index.html">返回首页</a>
+      <a href="models.html">模型</a>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="assets/js/plans.js"></script>
+  <script src="assets/js/studio.js"></script>
+</body>
+</html>

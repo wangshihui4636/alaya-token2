@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>视频生成体验 — Alaya Token</title>
+  <meta name="description" content="Alaya Token 视频生成单独体验：输入提示词，设定风格与画幅，生成并预览成片。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Noto+Sans+SC:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body class="enhance-page generate-exp-page">
+  <div class="page-glow" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="logo" href="index.html">
+      <span class="logo-mark" aria-hidden="true"></span>
+      Alaya Token
+    </a>
+    <nav class="header-nav" aria-label="主导航">
+      <a href="video.html">视频工作台</a>
+      <a href="enhance.html">提示词增强</a>
+      <a class="btn btn-primary" href="index.html#login">登录</a>
+    </nav>
+  </header>
+
+  <main class="enhance-main">
+    <div class="enhance-hero">
+      <a class="back-link" href="video.html">← 返回工作台</a>
+      <p class="section-label">Video Generate</p>
+      <h1>视频生成体验</h1>
+      <p class="enhance-lead">单独体验视频生成环节：填写提示词、选择场景与参数，预览成片并查看本环节费用。</p>
+      <div class="enhance-fee-pill">本环节计费 <strong id="feePill">¥0.48</strong>（按时长 × 风格单价）</div>
+    </div>
+
+    <section class="gen-workspace">
+      <div class="enhance-editor">
+        <div class="field">
+          <label for="genPrompt">正向提示词</label>
+          <textarea id="genPrompt" placeholder="描述画面、镜头运动、光影与氛围……"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="genNegative">负向提示词</label>
+          <textarea id="genNegative" class="neg" placeholder="模糊、抖动、水印、主体畸形……"></textarea>
+        </div>
+
+        <div class="field">
+          <label>用于场景</label>
+          <div class="scene-pick" id="scenePick" role="group" aria-label="选择场景">
+            <button type="button" class="scene-pick-btn active" data-scene="汽车广告">汽车广告</button>
+            <button type="button" class="scene-pick-btn" data-scene="漫剧">漫剧</button>
+            <button type="button" class="scene-pick-btn" data-scene="播客">播客</button>
+            <button type="button" class="scene-pick-btn" data-scene="自媒体">自媒体</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>风格</label>
+          <div class="chip-row" id="styleChips" role="group">
+            <button type="button" class="chip active" data-style="写实电影">写实电影</button>
+            <button type="button" class="chip" data-style="动漫">动漫</button>
+            <button type="button" class="chip" data-style="三维渲染">三维渲染</button>
+            <button type="button" class="chip" data-style="赛博朋克">赛博朋克</button>
+            <button type="button" class="chip" data-style="水墨意境">水墨意境</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>画幅比例</label>
+          <div class="ratio-grid" id="ratioGrid" role="group">
+            <button type="button" class="ratio-btn active" data-ratio="16:9"><span class="box"></span>16:9</button>
+            <button type="button" class="ratio-btn" data-ratio="9:16"><span class="box"></span>9:16</button>
+            <button type="button" class="ratio-btn" data-ratio="1:1"><span class="box"></span>1:1</button>
+            <button type="button" class="ratio-btn" data-ratio="4:3"><span class="box"></span>4:3</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="durationRange">时长 <em id="durationLabel">8s</em></label>
+          <input type="range" id="durationRange" min="4" max="16" step="1" value="8" />
+        </div>
+
+        <div class="cost-card gen-cost-card" aria-live="polite">
+          <div class="cost-card-head">
+            <span>视频生成费用</span>
+            <strong id="genCostTotal">¥0.48</strong>
+          </div>
+          <div class="cost-breakdown">
+            <div class="cost-line"><span>风格单价</span><em id="genUnit">¥0.06 / 秒</em></div>
+            <div class="cost-line"><span>时长</span><em id="genSeconds">8s</em></div>
+            <div class="cost-line"><span>画幅</span><em id="genRatioLabel">16:9</em></div>
+          </div>
+          <p class="cost-note">本页仅计视频生成费用，不含提示词增强与超分</p>
+        </div>
+
+        <div class="enhance-actions">
+          <button type="button" class="btn btn-primary" id="runGenerate">
+            开始生成
+            <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
+          </button>
+          <a class="btn btn-ghost" href="enhance.html" id="toEnhance">先去增强提示词</a>
+          <button type="button" class="btn btn-ghost" id="applyToStudio">带回工作台</button>
+        </div>
+      </div>
+
+      <div class="gen-preview-panel">
+        <div class="preview-toolbar">
+          <h2>生成预览</h2>
+          <span class="status-pill ready" id="statusPill">
+            <span class="dot" aria-hidden="true"></span>
+            <span id="statusText">待命</span>
+          </span>
+        </div>
+        <div class="gen-preview-stage">
+          <div class="preview-frame" id="previewFrame">
+            <div class="preview-placeholder" id="previewPlaceholder">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M10 9l5 3-5 3V9z"/></svg>
+              <p>填写提示词并点击「开始生成」，在此预览成片效果。</p>
+            </div>
+            <div class="preview-result" id="previewResult">
+              <div class="preview-visual" id="previewVisual"></div>
+              <div class="preview-caption">
+                <p class="scene" id="resultScene"></p>
+                <p class="meta" id="resultMeta"></p>
+                <p class="preview-cost-line" id="resultCost"></p>
+              </div>
+            </div>
+            <div class="gen-progress" id="genProgress">
+              <div class="bar" id="genBar"></div>
+            </div>
+          </div>
+        </div>
+        <div class="gen-side-meta">
+          <div>
+            <span>当前场景</span>
+            <strong id="metaScene">汽车广告</strong>
+          </div>
+          <div>
+            <span>风格 / 画幅</span>
+            <strong id="metaStyleRatio">写实电影 · 16:9</strong>
+          </div>
+          <div>
+            <span>本环节费用</span>
+            <strong id="metaFee">¥0.48</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>© DataCanvas 九章云极 · Video Generate</span>
+    <div class="footer-links">
+      <a href="video.html">视频工作台</a>
+      <a href="enhance.html">提示词增强</a>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script src="assets/js/generate.js"></script>
+</body>
+</html>

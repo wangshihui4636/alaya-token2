@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alaya Token — 面向智能的专业模型服务</title>
+  <meta name="description" content="九章云极 Alaya Token：聚合文本与视频大模型，OpenAI / Anthropic 兼容接口，专业智能基础设施。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Noto+Sans+SC:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <div class="page-glow" aria-hidden="true"></div>
+  <div class="notice-bar">
+    <span class="notice-dot" aria-hidden="true"></span>
+    Kimi K3 满血部署上线
+    <a href="models.html?q=Kimi">立即体验 →</a>
+  </div>
+
+  <header class="site-header">
+    <a class="logo" href="index.html">
+      <span class="logo-mark" aria-hidden="true"></span>
+      Alaya Token
+    </a>
+    <nav class="header-nav" aria-label="主导航">
+      <a href="models.html">模型</a>
+      <a href="#hub">构建入口</a>
+      <a href="#subscribe">订阅</a>
+      <a href="#docs">文档</a>
+      <button class="lang" type="button" aria-label="切换语言">EN</button>
+      <a href="#register">注册</a>
+      <a class="btn btn-primary" href="#login">
+        登录
+        <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
+      </a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero hero-compact" aria-labelledby="hero-title">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="hero-gradient"></div>
+        <div class="hero-grid"></div>
+        <div class="hero-orb"></div>
+        <canvas class="neural-canvas" id="neural"></canvas>
+      </div>
+      <div class="hero-content">
+        <p class="brand-signal"><span class="brand-line" aria-hidden="true"></span>Alaya Token</p>
+        <h1 id="hero-title">面向智能的专业 <span class="accent">Alaya Token</span></h1>
+        <p class="hero-lead">
+          聚合 Kimi K3、GLM、DeepSeek 等文本与视频大模型，聚合而不锁定，提供 OpenAI / Anthropic 兼容接口。
+        </p>
+        <div class="hero-pills" aria-hidden="true">
+          <span>OpenAI 兼容</span>
+          <span>Anthropic 兼容</span>
+          <span>文本 · 视频</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-hub" id="hub" aria-label="构建与落地入口">
+      <div class="hub-tabs" role="tablist" aria-label="首页入口">
+        <button
+          type="button"
+          class="hub-tab active"
+          role="tab"
+          id="tab-models"
+          aria-selected="true"
+          aria-controls="panel-models"
+          data-panel="panel-models"
+        >
+          选择适合的模型构建
+        </button>
+        <button
+          type="button"
+          class="hub-tab"
+          role="tab"
+          id="tab-cases"
+          aria-selected="false"
+          aria-controls="panel-cases"
+          data-panel="panel-cases"
+        >
+          探索企业落地实践
+        </button>
+      </div>
+
+      <div
+        class="hub-panel active"
+        id="panel-models"
+        role="tabpanel"
+        aria-labelledby="tab-models"
+      >
+        <div class="hub-split">
+          <aside class="hub-intro">
+            <span class="hub-eyebrow">One-stop API</span>
+            <h2>通过 Alaya Token 开启一站式大模型服务</h2>
+            <p>快速接入文本与视频能力，OpenAI / Anthropic 兼容，面向编程、办公、创作与决策全链路。</p>
+            <div class="hub-code">
+              <span class="hub-code-label">API</span>
+              <code>curl -X POST https://api.alaya.token/v1/chat/completions</code>
+              <button type="button" class="hub-copy" id="copyCmd" aria-label="复制命令">复制</button>
+            </div>
+            <div class="hub-intro-actions">
+              <a class="btn btn-primary" href="models.html">
+                进入模型广场
+                <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
+              </a>
+              <div class="hub-mini-links">
+                <a href="models.html?type=text">文本</a>
+                <a href="models.html?type=video">视频</a>
+                <a href="video.html">工作台</a>
+                <a href="#subscribe">订阅</a>
+                <a href="#docs">文档</a>
+              </div>
+            </div>
+          </aside>
+
+          <div class="hub-latest">
+            <div class="hub-latest-head">
+              <h3>最新模型</h3>
+              <a class="text-link" href="models.html">模型广场 <span aria-hidden="true">→</span></a>
+            </div>
+            <ul class="latest-list">
+              <li>
+                <a class="latest-item" href="models.html?q=Kimi">
+                  <span class="latest-icon icon-kimi" aria-hidden="true"></span>
+                  <span class="latest-body">
+                    <strong>Kimi K3</strong>
+                    <em>长上下文旗舰 · 推理 / 编程 / Agent</em>
+                  </span>
+                  <span class="latest-price">
+                    <span>输入 8 元/百万</span>
+                    <span>输出 32 元/百万</span>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a class="latest-item" href="video.html">
+                  <span class="latest-icon icon-video" aria-hidden="true"></span>
+                  <span class="latest-body">
+                    <strong>Alaya Video</strong>
+                    <em>文本生成视频 · 风格与画幅可控</em>
+                  </span>
+                  <span class="latest-price">
+                    <span>按次计费</span>
+                    <span>体验工作台</span>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a class="latest-item" href="models.html?q=DeepSeek">
+                  <span class="latest-icon icon-ds" aria-hidden="true"></span>
+                  <span class="latest-body">
+                    <strong>DeepSeek V3</strong>
+                    <em>高性价比推理与代码模型</em>
+                  </span>
+                  <span class="latest-price">
+                    <span>输入 2 元/百万</span>
+                    <span>输出 8 元/百万</span>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a class="latest-item" href="models.html?q=GLM">
+                  <span class="latest-icon icon-glm" aria-hidden="true"></span>
+                  <span class="latest-body">
+                    <strong>GLM-4.6</strong>
+                    <em>通用对话与办公创作主力</em>
+                  </span>
+                  <span class="latest-price">
+                    <span>输入 5 元/百万</span>
+                    <span>输出 20 元/百万</span>
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="hub-panel"
+        id="panel-cases"
+        role="tabpanel"
+        aria-labelledby="tab-cases"
+        hidden
+      >
+        <div class="practice-shell">
+          <div class="industry-bar" id="industryBar" role="tablist" aria-label="行业分类">
+            <button type="button" class="industry-chip active" data-industry="auto" aria-selected="true">汽车</button>
+            <button type="button" class="industry-chip" data-industry="finance" aria-selected="false">金融</button>
+            <button type="button" class="industry-chip" data-industry="device" aria-selected="false">智能终端</button>
+            <button type="button" class="industry-chip" data-industry="consumer" aria-selected="false">消费</button>
+            <button type="button" class="industry-chip" data-industry="edu" aria-selected="false">教育</button>
+            <button type="button" class="industry-chip" data-industry="media" aria-selected="false">影视广告</button>
+            <button type="button" class="industry-chip" data-industry="energy" aria-selected="false">能源交通</button>
+          </div>
+
+          <div class="practice-feature" id="practiceFeature">
+            <div class="practice-feature-copy">
+              <h2 id="practiceHeadline">助力主流车企 AI 创新，Alaya Token 赋能智能座舱与驾驶云</h2>
+              <a class="btn btn-dark" href="#meta" id="practiceCta">立即咨询</a>
+            </div>
+            <div class="practice-feature-visual" id="practiceVisual" aria-hidden="true" data-theme="auto"></div>
+          </div>
+
+          <div class="practice-cases" id="practiceCases">
+            <!-- filled by JS -->
+          </div>
+
+          <div class="partner-bar" aria-label="合作伙伴">
+            <span>MEIZU</span>
+            <span>HONOR</span>
+            <span>赛力斯</span>
+            <span>SAMSUNG</span>
+            <span>泰康</span>
+            <span>NIO</span>
+            <span>小米</span>
+            <span>兴业银行</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section gateway" id="gateway" aria-labelledby="gateway-title">
+      <div class="section-inner">
+        <p class="section-label reveal">Model Types</p>
+        <h2 class="section-title reveal" id="gateway-title">文本与视频，分开进入</h2>
+        <p class="section-desc reveal">按场景选择能力面，再在模型广场中搜索与对比。</p>
+
+        <div class="gateway-grid">
+          <a class="gateway-entry text-model reveal" href="models.html?type=text">
+            <span class="entry-badge">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>
+              Text Models
+            </span>
+            <h3>文本大模型</h3>
+            <p>对话、编程、推理与办公创作。兼容主流 API，一键切换 Kimi、GLM、DeepSeek 等模型。</p>
+            <div class="entry-meta">
+              <span class="entry-tag">Chat</span>
+              <span class="entry-tag">Code</span>
+              <span class="entry-tag">Reasoning</span>
+              <span class="entry-tag">可搜索</span>
+            </div>
+            <span class="entry-action">
+              在广场中浏览
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
+            </span>
+            <span class="entry-visual" aria-hidden="true"></span>
+          </a>
+
+          <a class="gateway-entry video-model reveal" href="models.html?type=video">
+            <span class="entry-badge">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3V9z"/></svg>
+              Video Models
+            </span>
+            <h3>视频大模型</h3>
+            <p>从提示词到成片的生成工作台。风格、画幅、负向提示一站式控制，灵感案例可一键复用。</p>
+            <div class="entry-meta">
+              <span class="entry-tag">T2V</span>
+              <span class="entry-tag">风格控制</span>
+              <span class="entry-tag">案例灵感</span>
+              <span class="entry-tag">Workbench</span>
+            </div>
+            <span class="entry-action">
+              筛选视频模型
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
+            </span>
+            <span class="entry-visual" aria-hidden="true"></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="capabilities" aria-label="平台能力">
+      <div class="cap-row">
+        <div class="cap-item reveal">
+          <h4>聚合而不锁定</h4>
+          <p>统一接入多厂商模型，按任务切换，避免单点绑定与迁移成本。</p>
+        </div>
+        <div class="cap-item reveal">
+          <h4>协议级兼容</h4>
+          <p>OpenAI / Anthropic 风格接口，现有应用与工具链几乎零改造接入。</p>
+        </div>
+        <div class="cap-item reveal">
+          <h4>贯穿业务场景</h4>
+          <p>编程、办公、创作与决策同一套 Token 体系，智能能力可编排、可扩展。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section subscribe-section plans-section" id="subscribe" aria-labelledby="subscribe-title">
+      <div class="section-inner">
+        <p class="section-label reveal">Subscribe</p>
+        <h2 class="section-title reveal" id="subscribe-title">订阅与充值</h2>
+        <p class="section-desc reveal">个人按量充值；团队按席位订阅；大客户可加购 TPM 保障包与视频额度。</p>
+
+        <article class="subscribe-block reveal" aria-labelledby="home-personal-title">
+          <div class="personal-topup" id="personalTopup">
+            <div class="personal-topup-head">
+              <h3 id="home-personal-title">Alaya 个人版 · 费用充值</h3>
+              <ul>
+                <li>消耗调用额度，模型灵活切换，个人适用更方便</li>
+                <li>账号仅针对单个账号使用</li>
+              </ul>
+            </div>
+            <div class="billing-table-wrap personal-topup-table-wrap">
+              <table class="billing-table personal-topup-table subscribe-table">
+                <thead>
+                  <tr>
+                    <th>充值范围</th>
+                    <th>对应费用</th>
+                    <th>适配模型</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="topup-amount-list" id="topupAmounts" role="group" aria-label="充值金额">
+                        <button type="button" class="topup-amount active" data-amount="10">10</button>
+                        <button type="button" class="topup-amount" data-amount="50">50</button>
+                        <button type="button" class="topup-amount" data-amount="100">100</button>
+                        <button type="button" class="topup-amount" data-amount="1000">1000</button>
+                        <button type="button" class="topup-amount" data-amount="2000">2000</button>
+                        <button type="button" class="topup-amount" data-amount="5000">5000</button>
+                        <button type="button" class="topup-amount" data-amount="custom">自定义</button>
+                      </div>
+                      <div class="topup-custom" id="topupCustom" hidden>
+                        <label for="topupCustomInput">自定义金额（元）</label>
+                        <input id="topupCustomInput" type="number" min="1" step="1" placeholder="请输入金额" />
+                      </div>
+                    </td>
+                    <td class="topup-merged">基于消耗直接扣费，充多少扣多少</td>
+                    <td class="topup-merged">所有模型</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="billing-estimate-note" id="topupSummary">已选充值 ¥10 · 基于消耗直接扣费，充多少扣多少 · 适配所有模型</p>
+            <a class="btn btn-primary plans-inline-buy" id="buyPersonal" href="#login">
+              去充值 · 个人版
+              <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="subscribe-block reveal" aria-labelledby="home-team-title">
+          <div class="team-plans-head">
+            <h3 id="home-team-title">Alaya 团队版 · 套餐总表</h3>
+            <p>席位订阅含 Credits 与吞吐上限；Standard / Pro 含视频额度。可叠加 TPM 保障包与视频加购包。</p>
+          </div>
+
+          <div class="billing-table-wrap">
+            <table class="billing-table subscribe-table team-matrix-table">
+              <thead>
+                <tr>
+                  <th>套餐</th>
+                  <th>价格</th>
+                  <th>权益要点</th>
+                  <th>定位</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Light</td>
+                  <td>¥150 /席/月</td>
+                  <td>25,000 Credits；TPM 不保障（或 ≤2,000）；不含视频模型</td>
+                  <td>个人→团队试用、流程验证；非生产主力</td>
+                </tr>
+                <tr>
+                  <td>Small</td>
+                  <td>¥300 /席/月</td>
+                  <td>50,000 Credits；TPM 5,000；不含视频模型；建议起购 3 席</td>
+                  <td>小团队轻量协作</td>
+                </tr>
+                <tr class="is-featured-row">
+                  <td>Standard <span class="table-badge">主推</span></td>
+                  <td>¥550 /席/月</td>
+                  <td>100,000 Credits；TPM 20,000；含文本/视频/图片模型；含视频额度 ¥200（增强+生成+超分）</td>
+                  <td>研发/数据默认主力席位</td>
+                </tr>
+                <tr>
+                  <td>Pro</td>
+                  <td>¥1,298 /席/月</td>
+                  <td>250,000 Credits；共享吞吐上限 TPM 50,000；含文本/视频/图片模型；含视频额度 ¥500（增强+生成+超分）</td>
+                  <td>重度核心 / 内容生产席位</td>
+                </tr>
+                <tr>
+                  <td>TPM 保障包</td>
+                  <td>月保障包价 ≈ 备机成本 ÷ 预期利用率 × 安全系数 1.3 × (1+毛利)</td>
+                  <td>付费：按小时后付费 + 按天预付费；按预留规格收，用不满也收；溢出时默认继续调用</td>
+                  <td>要高峰确定性、专属/高优吞吐的大客户</td>
+                </tr>
+                <tr>
+                  <td>视频模型加购包</td>
+                  <td>¥99 / ¥299 / ¥999 / ¥2,999<br />到账约 ¥99 / ¥320 / ¥1,100 / ¥3,400（大额有赠送）</td>
+                  <td>充入视频专用金额额度；仍按标价秒/Token 扣减（增强+生成+超分+输入）；不增加文本 Credits；与赠送额度共池、赠送优先；到期不清零结转</td>
+                  <td>套餐视频额度用尽后的续用</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="plans-grid" id="plansGrid"></div>
+          <a class="btn btn-primary plans-inline-buy" id="buyTeam" href="#login">
+            去订阅 · 团队版
+            <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
+          </a>
+        </article>
+
+        <article class="subscribe-block reveal" aria-labelledby="home-video-billing-title">
+          <div class="team-plans-head">
+            <h3 id="home-video-billing-title">Alaya 视频模型计费规则</h3>
+            <p>提示词增强按 Token；视频生成与超分按秒计费。团队 Standard / Pro 含额度和加购包均可抵扣。</p>
+          </div>
+
+          <h4 class="subscribe-subhead">提示词增强</h4>
+          <div class="billing-table-wrap">
+            <table class="billing-table subscribe-table">
+              <thead>
+                <tr>
+                  <th>计费方式</th>
+                  <th>计算公式</th>
+                  <th>输入（元/百万 Token）</th>
+                  <th>输出（元/百万 Token）</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>按 Token</td>
+                  <td>Token 单价 × Token 用量</td>
+                  <td>8.12</td>
+                  <td>32.20</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h4 class="subscribe-subhead">视频生成（输出 · 元/秒）</h4>
+          <div class="billing-table-wrap">
+            <table class="billing-table subscribe-table">
+              <thead>
+                <tr>
+                  <th>模型</th>
+                  <th>定位</th>
+                  <th>计算公式</th>
+                  <th>上下文</th>
+                  <th>480P</th>
+                  <th>768P</th>
+                  <th>2K</th>
+                  <th>图片</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>H3-Lite</td>
+                  <td>试错/批量</td>
+                  <td>秒 × 单价</td>
+                  <td>1M</td>
+                  <td>0.22</td>
+                  <td>0.36</td>
+                  <td>—</td>
+                  <td>0.13</td>
+                </tr>
+                <tr>
+                  <td>H3-Highspeed</td>
+                  <td>日常内容</td>
+                  <td>秒 × 单价</td>
+                  <td>1M</td>
+                  <td>0.36</td>
+                  <td>0.56</td>
+                  <td>—</td>
+                  <td>0.20</td>
+                </tr>
+                <tr>
+                  <td>H3</td>
+                  <td>画质成片</td>
+                  <td>秒 × 单价</td>
+                  <td>1M</td>
+                  <td>—</td>
+                  <td>0.70</td>
+                  <td>1.12</td>
+                  <td>0.20</td>
+                </tr>
+                <tr>
+                  <td>H3-Max</td>
+                  <td>多素材参考</td>
+                  <td>秒 × 单价</td>
+                  <td>1M</td>
+                  <td>0.46</td>
+                  <td>0.70</td>
+                  <td>—</td>
+                  <td>0.20</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h4 class="subscribe-subhead">超分（768P→2K）</h4>
+          <div class="billing-table-wrap">
+            <table class="billing-table subscribe-table">
+              <thead>
+                <tr>
+                  <th>计费项</th>
+                  <th>计算公式</th>
+                  <th>单价</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>输出 2K</td>
+                  <td>输出秒 × 单价</td>
+                  <td>0.42 元/秒</td>
+                </tr>
+                <tr>
+                  <td>输入 768P 片源</td>
+                  <td>输入秒 × 单价</td>
+                  <td>0.42 元/秒</td>
+                </tr>
+                <tr>
+                  <td>超额图</td>
+                  <td>张数 × 单价</td>
+                  <td>0.21 元/张</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <a class="btn btn-ghost plans-inline-buy" href="video.html">
+            前往视频工作台体验
+            <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <section class="meta-plan" id="meta" aria-labelledby="meta-title">
+      <span class="meta-pill">标杆案例征集</span>
+      <h2 id="meta-title">「九章元创计划」</h2>
+      <p>与开发者、团队共同打磨下一代智能应用。用 Alaya Token 构建你的标杆场景。</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>© DataCanvas 九章云极 · Alaya Token</span>
+    <div class="footer-links">
+      <a href="#docs">文档</a>
+      <a href="models.html">模型</a>
+      <a href="#subscribe">订阅</a>
+      <a href="#hub">构建入口</a>
+      <a href="video.html">视频工作台</a>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="assets/js/plans.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

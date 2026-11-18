@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>提示词增强体验 — Alaya Token</title>
+  <meta name="description" content="Alaya Token 提示词增强体验：输入原始提示词，选择场景，对比增强前后效果。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Noto+Sans+SC:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body class="enhance-page">
+  <div class="page-glow" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="logo" href="index.html">
+      <span class="logo-mark" aria-hidden="true"></span>
+      Alaya Token
+    </a>
+    <nav class="header-nav" aria-label="主导航">
+      <a href="video.html">视频工作台</a>
+      <a href="models.html">模型</a>
+      <a class="btn btn-primary" href="index.html#login">登录</a>
+    </nav>
+  </header>
+
+  <main class="enhance-main">
+    <div class="enhance-hero">
+      <a class="back-link" href="video.html">← 返回工作台</a>
+      <p class="section-label">Prompt Enhance</p>
+      <h1>提示词增强体验</h1>
+      <p class="enhance-lead">输入原始提示词，选择应用场景，查看增强结果，并对比增强前后的成片效果。</p>
+      <div class="enhance-fee-pill">按 Token 计费 · 输入 <strong>8.12</strong> / 输出 <strong>32.20</strong> 元每百万 Token</div>
+    </div>
+
+    <section class="enhance-workspace">
+      <div class="enhance-editor">
+        <div class="field">
+          <label for="rawPrompt">原始提示词 <em id="rawCount">0 字</em></label>
+          <textarea id="rawPrompt" placeholder="例如：一辆黑色轿车在城市道路上行驶"></textarea>
+        </div>
+
+        <div class="field">
+          <label>用于场景</label>
+          <div class="scene-pick" id="scenePick" role="group" aria-label="选择场景">
+            <button type="button" class="scene-pick-btn active" data-scene="汽车广告">汽车广告</button>
+            <button type="button" class="scene-pick-btn" data-scene="漫剧">漫剧</button>
+            <button type="button" class="scene-pick-btn" data-scene="播客">播客</button>
+            <button type="button" class="scene-pick-btn" data-scene="自媒体">自媒体</button>
+          </div>
+        </div>
+
+        <div class="enhance-actions">
+          <button type="button" class="btn btn-primary" id="enhanceBtn">
+            开始增强
+            <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
+          </button>
+          <button type="button" class="btn btn-ghost" id="applyToStudio">应用到工作台</button>
+        </div>
+      </div>
+
+      <div class="enhance-result-panel">
+        <div class="field">
+          <label>增强后提示词 <em id="outCount">0 字</em></label>
+          <div class="enhanced-box" id="enhancedBox" aria-live="polite">
+            <p class="enhanced-placeholder" id="enhancedPlaceholder">增强结果将显示在这里。可先输入提示词并选择场景。</p>
+            <p class="enhanced-text" id="enhancedText" hidden></p>
+          </div>
+        </div>
+        <div class="enhance-tags" id="enhanceTags" hidden>
+          <span>镜头调度</span>
+          <span>光影层次</span>
+          <span>场景约束</span>
+          <span>负向优化</span>
+        </div>
+        <p class="enhance-status" id="enhanceStatus">待命 · 未产生费用</p>
+      </div>
+    </section>
+
+    <section class="compare-section" aria-labelledby="compare-title">
+      <div class="compare-head">
+        <h2 id="compare-title">增强前后效果对比</h2>
+        <p>基于当前场景，示意原始提示词与增强提示词各自对应的成片表现。</p>
+      </div>
+
+      <div class="compare-grid">
+        <article class="compare-card">
+          <div class="compare-badge">增强前</div>
+          <div class="compare-frame" id="beforeFrame">
+            <div class="compare-visual" id="beforeVisual"></div>
+            <div class="compare-caption">
+              <strong>原始输出</strong>
+              <p id="beforePromptPreview">等待输入提示词…</p>
+            </div>
+          </div>
+          <ul class="compare-points" id="beforePoints">
+            <li>构图较平，镜头语言偏弱</li>
+            <li>光影与氛围不够明确</li>
+            <li>场景细节与约束不足</li>
+          </ul>
+        </article>
+
+        <article class="compare-card is-after">
+          <div class="compare-badge after">增强后</div>
+          <div class="compare-frame" id="afterFrame">
+            <div class="compare-visual is-enhanced" id="afterVisual"></div>
+            <div class="compare-caption">
+              <strong>增强输出</strong>
+              <p id="afterPromptPreview">完成增强后展示对比效果</p>
+            </div>
+          </div>
+          <ul class="compare-points" id="afterPoints">
+            <li>镜头运动与构图更清晰</li>
+            <li>光影层次与主体更突出</li>
+            <li>场景约束与可控性更强</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="billing-section" aria-labelledby="billing-title">
+      <div class="compare-head">
+        <h2 id="billing-title">计费规则</h2>
+        <p>提示词增强按 Token 计费，费用 = Token 单价 × Token 用量。</p>
+      </div>
+
+      <div class="billing-panel" aria-label="计费规则">
+        <div class="billing-panel-head">
+          <h3>提示词增强</h3>
+          <span>按 Token</span>
+        </div>
+        <div class="billing-table-wrap">
+          <table class="billing-table">
+            <thead>
+              <tr>
+                <th>计费方式</th>
+                <th>计算公式</th>
+                <th>输入（元/百万 Token）</th>
+                <th>输出（元/百万 Token）</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>按 Token</td>
+                <td>Token 单价 × Token 用量</td>
+                <td>8.12</td>
+                <td>32.20</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="billing-estimate" id="billingEstimate">
+          <div class="billing-estimate-title">
+            <strong>100 字提示词增强 · 预估费用</strong>
+            <em id="estimateTotal">¥0.0105</em>
+          </div>
+          <div class="billing-estimate-rows">
+            <div><span>输入 Token</span><em>≈ 100</em></div>
+            <div><span>输出 Token</span><em>≈ 300</em></div>
+            <div><span>输入费用</span><em>¥0.0008</em></div>
+            <div><span>输出费用</span><em>¥0.0097</em></div>
+          </div>
+          <p class="billing-estimate-note">按 1 字 ≈ 1 Token 估算；增强输出按约 3 倍长度计。实际以调用用量为准。</p>
+        </div>
+
+        <div class="billing-live" id="billingLive">
+          <div class="billing-estimate-title">
+            <strong>当前输入预估</strong>
+            <em id="liveTotal">¥0.0000</em>
+          </div>
+          <p class="billing-estimate-note" id="liveDetail">输入提示词后实时估算费用</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>© DataCanvas 九章云极 · Prompt Enhance</span>
+    <div class="footer-links">
+      <a href="video.html">视频工作台</a>
+      <a href="generate.html">视频生成</a>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script src="assets/js/enhance.js"></script>
+</body>
+</html>

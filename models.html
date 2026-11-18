@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>模型广场 — Alaya Token</title>
+  <meta name="description" content="Alaya Token 模型广场：搜索并浏览文本与视频大模型，查看能力与定价。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Noto+Sans+SC:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body class="models-page">
+  <div class="page-glow" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="logo" href="index.html">
+      <span class="logo-mark" aria-hidden="true"></span>
+      Alaya Token
+    </a>
+    <nav class="header-nav" aria-label="主导航">
+      <a href="index.html">首页</a>
+      <a class="nav-active" href="models.html">模型</a>
+      <a href="#docs">文档</a>
+      <button class="lang" type="button" aria-label="切换语言">EN</button>
+      <a href="#register">注册</a>
+      <a class="btn btn-primary" href="#login">
+        登录
+        <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
+      </a>
+    </nav>
+  </header>
+
+  <main class="square-main">
+    <div class="square-hero">
+      <div class="square-hero-inner">
+        <p class="section-label">Model Square</p>
+        <h1>模型广场</h1>
+        <p>聚合文本与视频大模型，按能力检索、按场景选用。</p>
+      </div>
+    </div>
+
+    <div class="square-toolbar">
+      <div class="square-title-row">
+        <h2>
+          模型
+          <span class="count-badge" id="modelCount">0</span>
+        </h2>
+        <div class="square-search" role="search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          <input
+            type="search"
+            id="modelSearch"
+            placeholder="搜索模型"
+            autocomplete="off"
+            aria-label="搜索模型"
+          />
+          <kbd class="search-hint" id="searchClear" hidden>Esc</kbd>
+        </div>
+      </div>
+
+      <div class="modality-tabs" id="modalityTabs" role="tablist" aria-label="模型类型">
+        <button type="button" class="modality-tab active" role="tab" aria-selected="true" data-type="all">全部</button>
+        <button type="button" class="modality-tab" role="tab" aria-selected="false" data-type="text">文本</button>
+        <button type="button" class="modality-tab" role="tab" aria-selected="false" data-type="video">视频</button>
+        <button type="button" class="modality-tab" role="tab" aria-selected="false" data-type="vision">视觉</button>
+        <button type="button" class="modality-tab" role="tab" aria-selected="false" data-type="multimodal">多模态</button>
+      </div>
+
+      <div class="scene-filter" aria-label="应用场景">
+        <span class="scene-filter-label">场景</span>
+        <div class="scene-filter-chips" id="sceneFilter" role="group" aria-label="按场景筛选模型">
+          <button type="button" class="scene-filter-chip active" data-scene="all" aria-pressed="true">全部场景</button>
+          <button type="button" class="scene-filter-chip" data-scene="coding" aria-pressed="false">编程开发</button>
+          <button type="button" class="scene-filter-chip" data-scene="office" aria-pressed="false">办公创作</button>
+          <button type="button" class="scene-filter-chip" data-scene="reasoning" aria-pressed="false">复杂推理</button>
+          <button type="button" class="scene-filter-chip" data-scene="agent" aria-pressed="false">Agent 编排</button>
+          <button type="button" class="scene-filter-chip" data-scene="auto-ad" aria-pressed="false">视频制作</button>
+          <button type="button" class="scene-filter-chip" data-scene="comic" aria-pressed="false">漫剧</button>
+          <button type="button" class="scene-filter-chip" data-scene="podcast" aria-pressed="false">播客</button>
+          <button type="button" class="scene-filter-chip" data-scene="media" aria-pressed="false">自媒体</button>
+          <button type="button" class="scene-filter-chip" data-scene="vision-doc" aria-pressed="false">图表文档</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="model-grid" id="modelGrid" aria-live="polite"></div>
+    <p class="square-empty" id="squareEmpty" hidden>未找到匹配模型，试试其他关键词、类型或场景。</p>
+  </main>
+
+  <footer class="site-footer">
+    <span>© DataCanvas 九章云极 · Alaya Token</span>
+    <div class="footer-links">
+      <a href="index.html">首页</a>
+      <a href="models.html">模型</a>
+      <a href="video.html">视频工作台</a>
+    </div>
+  </footer>
+
+  <script src="assets/js/models.js"></script>
+</body>
+</html>

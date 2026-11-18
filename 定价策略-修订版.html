@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alaya 定价策略 · 修订版（对齐大客户保障）</title>
+  <style>
+    :root {
+      --line: #c9d4e5;
+      --head: #dbe8f8;
+      --bg: #fff;
+      --muted: #5b6b7c;
+      --accent: #1a5fb4;
+      --mark: #fff6e5;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 32px 28px 64px;
+      font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+      color: #1c2430;
+      background: #f5f7fb;
+      line-height: 1.55;
+    }
+    .wrap { max-width: 1100px; margin: 0 auto; }
+    h1 { font-size: 22px; margin: 0 0 8px; }
+    h2 { font-size: 18px; margin: 28px 0 10px; }
+    .note {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+    .legend {
+      display: flex; flex-wrap: wrap; gap: 10px 16px;
+      font-size: 12px; color: var(--muted); margin-bottom: 16px;
+    }
+    .legend span::before {
+      content: "";
+      display: inline-block;
+      width: 10px; height: 10px;
+      margin-right: 6px;
+      vertical-align: -1px;
+      border: 1px solid var(--line);
+    }
+    .legend .new::before { background: #e8f7ee; }
+    .legend .chg::before { background: var(--mark); }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--bg);
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      vertical-align: top;
+      text-align: left;
+    }
+    th { background: var(--head); font-weight: 700; }
+    tr.is-new td { background: #f3fbf6; }
+    tr.is-chg td { background: var(--mark); }
+    .tag {
+      display: inline-block;
+      font-size: 11px;
+      padding: 1px 6px;
+      border-radius: 4px;
+      margin-left: 6px;
+      font-weight: 700;
+    }
+    .tag-new { background: #d8f3e3; color: #0f7a45; }
+    .tag-chg { background: #ffe2b8; color: #9a5b00; }
+    .tag-hot { background: #3563f5; color: #fff; }
+    ul.compact { margin: 0; padding-left: 18px; }
+    ul.compact li { margin: 2px 0; }
+    .foot {
+      margin-top: 28px;
+      padding: 14px 16px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Alaya 定价策略 · 修订版</h1>
+    <p class="note">
+      在原表格基础上写入修改项：区分「共享吞吐上限」与「TPM 专属预留」；补充年付/年框、支持与调度权益、溢出规则。
+      标黄 = 原文案调整；标绿 = 新增行。
+    </p>
+    <div class="legend">
+      <span class="chg">调整项</span>
+      <span class="new">新增项</span>
+    </div>
+
+    <h2>一、Alaya 团队版 · 套餐总表（修订）</h2>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:12%">套餐</th>
+          <th style="width:14%">价格</th>
+          <th style="width:38%">权益要点</th>
+          <th style="width:18%">支持与调度<span class="tag tag-new">新增列</span></th>
+          <th style="width:18%">定位</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="is-chg">
+          <td>Light</td>
+          <td>¥150 /席/月<br /><small>年付 ¥1,530（约 8.5 折）</small></td>
+          <td>
+            <ul class="compact">
+              <li>25,000 Credits</li>
+              <li><strong>共享吞吐上限</strong>：无保障 / ≤2,000 TPM（忙时可排队）</li>
+              <li>不含视频模型</li>
+              <li><strong>不承诺专属 TPM 预留</strong></li>
+            </ul>
+          </td>
+          <td>工单支持<br />共享池默认优先级</td>
+          <td>个人→团队试用、流程验证；非生产主力</td>
+        </tr>
+        <tr class="is-chg">
+          <td>Small</td>
+          <td>¥300 /席/月<br /><small>年付 ¥3,060（约 8.5 折）</small></td>
+          <td>
+            <ul class="compact">
+              <li>50,000 Credits</li>
+              <li><strong>共享吞吐上限</strong> TPM 5,000（非专属预留）</li>
+              <li>不含视频模型</li>
+              <li>建议起购 3 席</li>
+            </ul>
+          </td>
+          <td>工单支持<br />共享池默认优先级</td>
+          <td>小团队轻量协作</td>
+        </tr>
+        <tr class="is-chg">
+          <td>Standard <span class="tag tag-hot">主推</span></td>
+          <td>¥550 /席/月<br /><small>年付 ¥5,610（约 8.5 折）</small></td>
+          <td>
+            <ul class="compact">
+              <li>100,000 Credits</li>
+              <li><strong>共享吞吐上限</strong> TPM 20,000（文本/视频，非专属预留）</li>
+              <li>含文本/视频模型</li>
+              <li>含视频模型额度 ¥200（增强+生成+超分）</li>
+            </ul>
+          </td>
+          <td>工作时间优先响应<br />共享池 · 标准优先级</td>
+          <td>研发/数据默认主力席位</td>
+        </tr>
+        <tr class="is-chg">
+          <td>Pro</td>
+          <td>¥1,298 /席/月<br /><small>年付 ¥13,240（约 8.5 折）</small></td>
+          <td>
+            <ul class="compact">
+              <li>250,000 Credits</li>
+              <li><strong>共享吞吐上限</strong> TPM 50,000（显著高于 Standard，仍非专属预留）</li>
+              <li>含文本/视频模型</li>
+              <li>含视频模型额度 ¥500（增强+生成+超分）</li>
+              <li>可叠加购买「TPM 保障包」</li>
+            </ul>
+          </td>
+          <td>
+            <strong>专人对接（工作日）</strong><br />
+            故障 30 分钟响应<br />
+            <strong>P1 调度权重</strong>（可申请临时提权）
+          </td>
+          <td>重度核心 / 内容生产席位</td>
+        </tr>
+        <tr class="is-chg">
+          <td>共享吞吐扩容<br /><small>（原「TPM 加购」更名）</small></td>
+          <td>
+            +10k ¥99<br />
+            +20k ¥199<br />
+            +50k ¥449<br />
+            +100k ¥799
+          </td>
+          <td>
+            <ul class="compact">
+              <li>仅提升<strong>共享池吞吐上限</strong>，不增加 Credits / 模型</li>
+              <li>文本/视频模型均适用</li>
+              <li><strong>不承诺专属资源</strong>；忙时仍可能排队</li>
+              <li>适合：额度够、偶发触顶限流</li>
+            </ul>
+          </td>
+          <td>随所属席位档位</td>
+          <td>Credits 充足但触达限流时的软扩容</td>
+        </tr>
+        <tr class="is-new">
+          <td>TPM 保障包<br />（专属预留）<span class="tag tag-new">新增</span></td>
+          <td>
+            示例（可按成本校准）：<br />
+            +10k TPM ¥299/月<br />
+            +20k TPM ¥549/月<br />
+            +50k TPM ¥1,299/月<br />
+            +100k TPM ¥2,399/月<br />
+            <small>亦支持按天预付；年付约 8.5 折</small>
+          </td>
+          <td>
+            <ul class="compact">
+              <li><strong>专属预留容量</strong>：预留内不受公共池挤占（承诺可达吞吐）</li>
+              <li>预留费用按购买量计收，与是否打满无关</li>
+              <li>一期建议：预留内仍扣 Credits（买的是确定性）</li>
+              <li>超额策略可选：① 溢出按量（默认）② 硬限流 429</li>
+              <li>不增加 Credits；可与席位、共享扩容叠加</li>
+              <li>适用 Standard / Pro；大客户年框优先开通</li>
+            </ul>
+          </td>
+          <td>
+            绑定保障包等级<br />
+            Pro/年框可申请 <strong>P0/P1</strong><br />
+            权重调整留审计日志
+          </td>
+          <td>大客户高峰保障；对标竞品 TPM 预留</td>
+        </tr>
+        <tr class="is-chg">
+          <td>视频模型加购包</td>
+          <td>
+            ¥99 → 到账 ¥99<br />
+            ¥299 → 到账 ¥320<br />
+            ¥999 → 到账 ¥1,100<br />
+            ¥2,999 → 到账 ¥3,400
+          </td>
+          <td>
+            <ul class="compact">
+              <li>充入视频专用金额额度；按标价秒/Token 扣减（增强+生成+超分+输入）</li>
+              <li>不增加文本 Credits；<strong>不增加 TPM / 不承诺视频并发</strong></li>
+              <li>仅 Standard / Pro 可购；与套餐赠送额度共池，赠送优先，到期不清零结转</li>
+              <li><strong>额度 ≠ 高峰保障</strong>；视频高峰保障见下表「视频并发保障」</li>
+            </ul>
+          </td>
+          <td>随所属席位档位</td>
+          <td>套餐视频额度用尽后的续用</td>
+        </tr>
+        <tr class="is-new">
+          <td>视频并发保障<br />（可选）<span class="tag tag-new">新增</span></td>
+          <td>
+            按并发路数 · 月<br />
+            <small>示例：1 路 ¥399 / 3 路 ¥999 / 5 路 ¥1,599（最终以成本校准）</small>
+          </td>
+          <td>
+            <ul class="compact">
+              <li>保障视频任务排队优先级 / 预留并发路数</li>
+              <li>不增加视频金额额度；额度仍按秒计费扣减</li>
+              <li>可与 TPM 保障包、年框组合售卖</li>
+            </ul>
+          </td>
+          <td>内容生产大客户优先</td>
+          <td>解决「有额度仍排队」</td>
+        </tr>
+        <tr class="is-new">
+          <td>年框承诺包<span class="tag tag-new">新增</span></td>
+          <td>
+            年框 ¥5万 / ¥20万 / ¥50万<br />
+            <small>预付锁价；超额转按量</small>
+          </td>
+          <td>
+            <ul class="compact">
+              <li>承诺年消费，换取锁价 + 更高共享上限 + 开通 TPM 保障包绿色通道</li>
+              <li>含专属客户成功对接</li>
+              <li>可约定 P0 调度权重与书面 SLA（可用性/限流补偿）</li>
+              <li>用量仍走 Credits / 视频标价；保障另购或年框内赠送一定预留</li>
+            </ul>
+          </td>
+          <td>
+            <strong>专属 CSM</strong><br />
+            实时响应<br />
+            <strong>P0 调度权重</strong><br />
+            可随时申请调整线上权重
+          </td>
+          <td>大客户主签约形态；平衡利用率与保障</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="note">说明：套餐内原「TPM xx」一律定义为<strong>共享吞吐上限</strong>；只有「TPM 保障包」才是领导要求的资源预留。</p>
+
+    <h2>二、Alaya 个人版 · 费用充值（修订）</h2>
+    <ul class="compact" style="margin-bottom:10px">
+      <li>消耗调用额度，模型灵活切换，个人适用更方便</li>
+      <li>账号仅针对单个账号使用</li>
+      <li><strong>修订：</strong>大额预付给予赠送，换现金流；不承诺 TPM</li>
+    </ul>
+    <table>
+      <thead>
+        <tr>
+          <th>充值范围</th>
+          <th>对应费用 / 权益</th>
+          <th>适配模型</th>
+          <th>TPM 与支持</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>10 / 50 / 100</td>
+          <td>充多少到账多少；按消耗扣费</td>
+          <td>所有模型</td>
+          <td rowspan="3">共享池，无 TPM 承诺<br />标准工单支持</td>
+        </tr>
+        <tr class="is-chg">
+          <td>1,000 / 2,000</td>
+          <td>按消耗扣费；<strong>赠送 3%</strong> 额度</td>
+          <td>所有模型</td>
+        </tr>
+        <tr class="is-chg">
+          <td>5,000 / 自定义（≥5,000）</td>
+          <td>按消耗扣费；<strong>赠送 5%</strong> 额度</td>
+          <td>所有模型</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>三、Alaya coding 版 · 套餐总表</h2>
+    <p class="note">原表为空。建议先占位，避免与团队版权益冲突；正式上线前单独定 Credits/TPM。</p>
+    <table>
+      <thead>
+        <tr>
+          <th>套餐</th>
+          <th>价格</th>
+          <th>权益要点</th>
+          <th>定位</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="is-new">
+          <td colspan="4">（待定）建议：面向 IDE/编码场景的 Credits + 较低共享 TPM；不含视频；不与团队版 Pro 重复承诺大客户 SLA。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>四、Alaya 视频模型计费规则（保留单价 + 补充保障口径）</h2>
+    <h3 style="font-size:15px;margin:12px 0 8px">4.1 提示词增强</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>计费方式</th>
+          <th>计算公式</th>
+          <th>输入（元/百万 Token）</th>
+          <th>输出（元/百万 Token）</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>按 Token</td>
+          <td>Token 单价 × Token 用量</td>
+          <td>8.12</td>
+          <td>32.20</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-size:15px;margin:16px 0 8px">4.2 视频生成（输出 · 元/秒）</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>模型</th>
+          <th>定位</th>
+          <th>计算公式</th>
+          <th>上下文</th>
+          <th>480P</th>
+          <th>768P</th>
+          <th>2K</th>
+          <th>图片</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>H3-Lite</td>
+          <td>试错/批量</td>
+          <td>秒 × 单价</td>
+          <td>1M</td>
+          <td>0.22</td>
+          <td>0.36</td>
+          <td>—</td>
+          <td>0.13</td>
+        </tr>
+        <tr>
+          <td>H3-Highspeed</td>
+          <td>日常内容</td>
+          <td>秒 × 单价</td>
+          <td>1M</td>
+          <td>0.36</td>
+          <td>0.56</td>
+          <td>—</td>
+          <td>0.20</td>
+        </tr>
+        <tr>
+          <td>H3</td>
+          <td>画质成片</td>
+          <td>秒 × 单价</td>
+          <td>1M</td>
+          <td>—</td>
+          <td>0.70</td>
+          <td>1.12</td>
+          <td>0.20</td>
+        </tr>
+        <tr>
+          <td>H3-Max</td>
+          <td>多素材参考</td>
+          <td>秒 × 单价</td>
+          <td>1M</td>
+          <td>0.46</td>
+          <td>0.70</td>
+          <td>—</td>
+          <td>0.20</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-size:15px;margin:16px 0 8px">4.3 超分（768P→2K）</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>计费项</th>
+          <th>计算公式</th>
+          <th>单价</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>输出 2K</td>
+          <td>输出秒 × 单价</td>
+          <td>0.42 元/秒</td>
+        </tr>
+        <tr>
+          <td>输入 768P 片源</td>
+          <td>输入秒 × 单价</td>
+          <td>0.42 元/秒</td>
+        </tr>
+        <tr>
+          <td>超额图</td>
+          <td>张数 × 单价</td>
+          <td>0.21 元/张</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="is-new" style="margin-top:12px">
+      <thead>
+        <tr>
+          <th colspan="2">视频计费补充规则（新增，建议写进制度/合同）</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="is-new">
+          <td style="width:28%">额度与并发</td>
+          <td>套餐赠送额度、视频加购包 = <strong>金额额度</strong>；不代表并发保障。高峰排队时，未购「视频并发保障」/年框 P0 的任务走共享队列。</td>
+        </tr>
+        <tr class="is-new">
+          <td>溢出与兜底</td>
+          <td>自建过载时可路由至外购通道；对外可按标价或略上浮计费（覆盖通道成本）。外购仅作峰值/故障兜底，不作为日常主供给。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>五、修订对照摘要（方便汇报）</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>领导维度</th>
+          <th>原表</th>
+          <th>修订后写入</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>产品 · 包年包月预付</td>
+          <td>仅月席位 + 个人充多少用多少</td>
+          <td>席位年付约 8.5 折；个人大额赠送；新增年框承诺包</td>
+        </tr>
+        <tr>
+          <td>产品 · TPM 资源预留</td>
+          <td>套餐 TPM + TPM 加购（易被理解成保障）</td>
+          <td>套餐 TPM = 共享上限；原加购更名「共享吞吐扩容」；新增「TPM 保障包」真预留</td>
+        </tr>
+        <tr>
+          <td>技术支持 · 大客户</td>
+          <td>未体现</td>
+          <td>新增「支持与调度」列；Pro/年框专人对接与 P0/P1 权重</td>
+        </tr>
+        <tr>
+          <td>研发 · 路由/外购兜底</td>
+          <td>未体现</td>
+          <td>写入超额溢出策略 + 视频过载外购兜底计费口径</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="foot">
+      <strong>使用说明：</strong>可直接浏览器打开本页复制到 Word/飞书文档。TPM 保障包与视频并发保障的示例价需财务按「备机成本 ÷ 预期利用率」校准后再对外报价。
+      文件位置：<code>定价策略-修订版.html</code>
+    </div>
+  </div>
+</body>
+</html>
