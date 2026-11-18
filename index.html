@@ -28,7 +28,6 @@
       <a href="#hub">构建入口</a>
       <a href="#recommend">智能推荐</a>
       <a href="#subscribe">订阅</a>
-      <a href="#reliability">安全稳定</a>
       <a href="#docs">文档</a>
       <button class="lang" type="button" aria-label="切换语言">EN</button>
       <a href="#register">注册</a>
@@ -295,45 +294,43 @@
     <section class="section reliability-section" id="reliability" aria-labelledby="reliability-title">
       <div class="section-inner">
         <p class="section-label reveal">Reliability</p>
-        <h2 class="section-title reveal" id="reliability-title">安全稳定，生产级吞吐保障</h2>
-        <p class="section-desc reveal">共享吞吐满足日常协作；高峰与关键链路可叠加 TPM 保障包，降低 429 与排队不确定性。</p>
+        <h2 class="section-title reveal" id="reliability-title">安全稳定，面向生产连续服务</h2>
+        <p class="section-desc reveal">日常用共享吞吐；高峰与关键链路可叠加 TPM 保障包，降低 429 与排队不确定性。</p>
 
-        <div class="reliability-grid" role="list">
-          <article class="reliability-item reveal" role="listitem">
-            <span class="reliability-icon" aria-hidden="true">SLA</span>
-            <h3>稳定可用性</h3>
-            <p>多可用区部署与健康探测，接口层面向生产连续服务，异常自动隔离与恢复。</p>
-          </article>
-          <article class="reliability-item reveal" role="listitem">
-            <span class="reliability-icon" aria-hidden="true">SEC</span>
-            <h3>数据与访问安全</h3>
-            <p>密钥隔离、最小权限与审计留痕；企业流量可走专属链路，降低串扰与越权风险。</p>
-          </article>
-          <article class="reliability-item reveal" role="listitem">
-            <span class="reliability-icon" aria-hidden="true">TPM</span>
-            <h3>高峰确定性</h3>
-            <p>TPM 保障包按预留规格计费，高峰优先调度；溢出默认可继续调用，避免硬限流打断业务。</p>
-          </article>
-          <article class="reliability-item reveal" role="listitem">
-            <span class="reliability-icon" aria-hidden="true">OBS</span>
-            <h3>可观测与告警</h3>
-            <p>用量、延迟与错误率可视化，支持阈值与容量水位提醒，便于扩容与成本治理。</p>
-          </article>
+        <div class="cap-row reliability-caps reveal">
+          <div class="cap-item">
+            <h4>稳定可用性</h4>
+            <p>多可用区部署与健康探测，异常自动隔离恢复，接口层面向生产连续服务。</p>
+          </div>
+          <div class="cap-item">
+            <h4>数据与访问安全</h4>
+            <p>密钥隔离、最小权限与审计留痕；企业流量可走专属链路，降低串扰风险。</p>
+          </div>
+          <div class="cap-item">
+            <h4>高峰确定性</h4>
+            <p>TPM 保障包按预留规格优先调度；溢出默认可继续调用，避免硬限流打断业务。</p>
+          </div>
+          <div class="cap-item">
+            <h4>可观测与告警</h4>
+            <p>用量、延迟与错误率可视化，支持阈值与容量水位提醒，便于扩容治理。</p>
+          </div>
         </div>
 
-        <div class="reliability-cta reveal">
-          <div class="reliability-cta-copy">
-            <h3>需要高峰确定性？加购 TPM 保障包</h3>
-            <p>适合 Agent、批量推理、智能座舱与金融高峰窗口。按小时后付费或按天预付费，与团队席位叠加。</p>
-          </div>
-          <div class="reliability-cta-actions">
+        <aside class="hub-intro reliability-cta reveal">
+          <span class="hub-eyebrow">TPM Guarantee</span>
+          <h2>需要高峰确定性？加购 TPM 保障包</h2>
+          <p>适合 Agent、批量推理、智能座舱与金融高峰窗口。按小时后付费或按天预付费，与团队席位叠加。</p>
+          <div class="hub-intro-actions">
             <a class="btn btn-primary" href="#tpm" id="gotoTpm">
               进入 TPM 保障包购买
               <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
             </a>
-            <a class="btn btn-ghost" href="#recommend">先按场景推荐方案</a>
+            <div class="hub-mini-links">
+              <a href="#recommend">场景推荐</a>
+              <a href="#subscribe">查看订阅</a>
+            </div>
           </div>
-        </div>
+        </aside>
       </div>
     </section>
 
@@ -341,22 +338,23 @@
       <div class="section-inner">
         <p class="section-label reveal">Smart Match</p>
         <h2 class="section-title reveal" id="recommend-title">结合客户场景，智能推荐模型与套餐</h2>
-        <p class="section-desc reveal">选择业务场景与用量特征，系统给出模型组合、席位套餐，以及是否建议叠加 TPM 保障包。</p>
+        <p class="section-desc reveal">选择业务场景与用量特征，给出模型组合、席位套餐，以及是否建议叠加 TPM 保障包。</p>
 
-        <div class="recommend-panel reveal">
-          <div class="recommend-controls">
-            <fieldset class="recommend-fieldset">
-              <legend>业务场景</legend>
-              <div class="recommend-chips" id="recommendScenes" role="radiogroup" aria-label="业务场景">
-                <button type="button" class="recommend-chip active" role="radio" aria-checked="true" data-scene="coding">编程研发</button>
-                <button type="button" class="recommend-chip" role="radio" aria-checked="false" data-scene="office">办公客服</button>
-                <button type="button" class="recommend-chip" role="radio" aria-checked="false" data-scene="content">内容创作</button>
-                <button type="button" class="recommend-chip" role="radio" aria-checked="false" data-scene="video">视频生产</button>
-                <button type="button" class="recommend-chip" role="radio" aria-checked="false" data-scene="auto">智能座舱</button>
-                <button type="button" class="recommend-chip" role="radio" aria-checked="false" data-scene="finance">金融研报</button>
-                <button type="button" class="recommend-chip" role="radio" aria-checked="false" data-scene="agent">Agent 高峰</button>
-              </div>
-            </fieldset>
+        <div class="hub-split recommend-split reveal">
+          <aside class="hub-intro recommend-controls">
+            <span class="hub-eyebrow">Scenario</span>
+            <h2>描述你的业务场景</h2>
+            <p>先选场景，再确认团队规模与高峰要求，系统会同步推荐模型与购买路径。</p>
+
+            <div class="industry-bar recommend-scenes" id="recommendScenes" role="radiogroup" aria-label="业务场景">
+              <button type="button" class="industry-chip active" role="radio" aria-checked="true" data-scene="coding">编程研发</button>
+              <button type="button" class="industry-chip" role="radio" aria-checked="false" data-scene="office">办公客服</button>
+              <button type="button" class="industry-chip" role="radio" aria-checked="false" data-scene="content">内容创作</button>
+              <button type="button" class="industry-chip" role="radio" aria-checked="false" data-scene="video">视频生产</button>
+              <button type="button" class="industry-chip" role="radio" aria-checked="false" data-scene="auto">智能座舱</button>
+              <button type="button" class="industry-chip" role="radio" aria-checked="false" data-scene="finance">金融研报</button>
+              <button type="button" class="industry-chip" role="radio" aria-checked="false" data-scene="agent">Agent 高峰</button>
+            </div>
 
             <div class="recommend-selects">
               <label class="recommend-field">
@@ -378,14 +376,20 @@
               </label>
             </div>
 
-            <button type="button" class="btn btn-primary" id="recommendRun">
-              生成智能推荐
-              <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
-            </button>
-          </div>
+            <div class="hub-intro-actions">
+              <button type="button" class="btn btn-primary" id="recommendRun">
+                生成智能推荐
+                <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
+              </button>
+            </div>
+          </aside>
 
-          <div class="recommend-result" id="recommendResult" aria-live="polite">
-            <p class="recommend-result-empty">选择场景后点击「生成智能推荐」，将给出模型与购买建议。</p>
+          <div class="hub-latest recommend-result" id="recommendResult" aria-live="polite">
+            <div class="hub-latest-head">
+              <h3>推荐结果</h3>
+              <a class="text-link" href="#subscribe">去订阅 <span aria-hidden="true">→</span></a>
+            </div>
+            <p class="recommend-result-empty">选择场景后点击「生成智能推荐」，将在此给出模型与套餐建议。</p>
           </div>
         </div>
       </div>
@@ -510,51 +514,50 @@
           </a>
         </article>
 
-        <article class="subscribe-block tpm-block reveal" id="tpm" aria-labelledby="home-tpm-title">
-          <div class="team-plans-head">
-            <h3 id="home-tpm-title">TPM 保障包 · 高峰确定性加购</h3>
-            <p>在团队席位共享吞吐之上叠加预留容量。适合生产高峰、Agent 并发与关键链路；可与 Standard / Pro 同账号叠加。</p>
-          </div>
+        <article class="subscribe-block reveal" id="tpm" aria-labelledby="home-tpm-title">
+          <div class="personal-topup" id="tpmTopup">
+            <div class="personal-topup-head">
+              <h3 id="home-tpm-title">TPM 保障包 · 高峰确定性加购</h3>
+              <ul>
+                <li>在团队席位共享吞吐之上叠加预留容量，可与 Standard / Pro 同账号使用</li>
+                <li>溢出时默认继续调用；仍按模型单价扣减 Credits，保障包收取容量确定性费用</li>
+                <li>适合生产高峰、Agent 并发与关键链路；可从智能推荐一键带入规格</li>
+              </ul>
+            </div>
 
-          <div class="tpm-buy-grid">
-            <label class="tpm-option">
-              <input type="radio" name="tpmTier" value="day" checked />
-              <span class="tpm-option-body">
-                <strong>按天预付费</strong>
-                <em>预留规格 · 用不满也收</em>
-                <span>适合已知高峰窗口（发布日、营销峰值、批处理窗口）</span>
-              </span>
-            </label>
-            <label class="tpm-option">
-              <input type="radio" name="tpmTier" value="hour" />
-              <span class="tpm-option-body">
-                <strong>按小时后付费</strong>
-                <em>弹性启用 · 按实际开启计费</em>
-                <span>适合突发扩容、临时压测与短时活动</span>
-              </span>
-            </label>
-            <label class="tpm-option">
-              <input type="radio" name="tpmTier" value="month" />
-              <span class="tpm-option-body">
-                <strong>月保障包</strong>
-                <em>价 ≈ 备机成本 ÷ 利用率 × 1.3 × (1+毛利)</em>
-                <span>适合长期生产、专属/高优吞吐诉求</span>
-              </span>
-            </label>
-          </div>
+            <div class="billing-table-wrap personal-topup-table-wrap">
+              <table class="billing-table personal-topup-table subscribe-table">
+                <thead>
+                  <tr>
+                    <th>计费方式</th>
+                    <th>说明</th>
+                    <th>适用</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="topup-amount-list" id="tpmTiers" role="group" aria-label="TPM 计费方式">
+                        <button type="button" class="topup-amount active" data-tier="day">按天预付费</button>
+                        <button type="button" class="topup-amount" data-tier="hour">按小时后付费</button>
+                        <button type="button" class="topup-amount" data-tier="month">月保障包</button>
+                      </div>
+                    </td>
+                    <td class="topup-merged" id="tpmTierDesc">预留规格 · 用不满也收；适合已知高峰窗口</td>
+                    <td class="topup-merged" id="tpmTierFit">发布日 / 营销峰值 / 批处理</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
 
-          <ul class="tpm-points">
-            <li>溢出时默认继续调用，优先保障业务连续性（非硬限流打断）</li>
-            <li>仍按模型单价扣减 Credits；保障包收取的是容量确定性费用</li>
-            <li>可从智能推荐结果一键带入建议规格，再登录下单</li>
-          </ul>
-
-          <div class="tpm-buy-actions">
-            <a class="btn btn-primary plans-inline-buy" id="buyTpm" href="#login?edition=tpm&tier=day">
-              购买 TPM 保障包
-              <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
-            </a>
-            <a class="btn btn-ghost" href="#reliability">了解安全稳定能力</a>
+            <p class="billing-estimate-note" id="tpmSummary">已选 · 按天预付费 · 与团队席位叠加购买</p>
+            <div class="tpm-buy-actions">
+              <a class="btn btn-primary plans-inline-buy" id="buyTpm" href="#login?edition=tpm&tier=day">
+                购买 TPM 保障包
+                <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
+              </a>
+              <a class="btn btn-ghost" href="#reliability">了解安全稳定</a>
+            </div>
           </div>
         </article>
 
@@ -702,6 +705,7 @@
       <a href="#reliability">安全稳定</a>
       <a href="#hub">构建入口</a>
       <a href="video.html">视频工作台</a>
+      <a href="models.html">模型</a>
     </div>
   </footer>
 
