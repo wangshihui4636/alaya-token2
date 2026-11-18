@@ -189,29 +189,57 @@
     }
 
     const buyTpm = document.getElementById("buyTpm");
-    const tpmRadios = document.querySelectorAll('input[name="tpmTier"]');
+    const tpmTiers = document.getElementById("tpmTiers");
+    const tpmTierDesc = document.getElementById("tpmTierDesc");
+    const tpmTierFit = document.getElementById("tpmTierFit");
+    const tpmSummary = document.getElementById("tpmSummary");
+    const TPM_META = {
+      day: {
+        label: "按天预付费",
+        desc: "预留规格 · 用不满也收；适合已知高峰窗口",
+        fit: "发布日 / 营销峰值 / 批处理",
+      },
+      hour: {
+        label: "按小时后付费",
+        desc: "弹性启用 · 按实际开启计费；适合突发扩容",
+        fit: "临时压测 / 短时活动",
+      },
+      month: {
+        label: "月保障包",
+        desc: "价 ≈ 备机成本 ÷ 利用率 × 1.3 × (1+毛利)",
+        fit: "长期生产 / 专属高优吞吐",
+      },
+    };
+    let selectedTpmTier = "day";
 
     function syncTpmBuy() {
-      if (!buyTpm) return;
-      const tier =
-        document.querySelector('input[name="tpmTier"]:checked')?.value || "day";
-      buyTpm.href = `index.html#login?edition=tpm&tier=${encodeURIComponent(tier)}`;
+      const meta = TPM_META[selectedTpmTier] || TPM_META.day;
+      if (tpmTierDesc) tpmTierDesc.textContent = meta.desc;
+      if (tpmTierFit) tpmTierFit.textContent = meta.fit;
+      if (tpmSummary) {
+        tpmSummary.textContent = `已选 · ${meta.label} · 与团队席位叠加购买`;
+      }
+      if (buyTpm) {
+        buyTpm.href = `index.html#login?edition=tpm&tier=${encodeURIComponent(selectedTpmTier)}`;
+      }
     }
 
-    tpmRadios.forEach((radio) => {
-      radio.addEventListener("change", () => {
+    if (tpmTiers) {
+      tpmTiers.addEventListener("click", (e) => {
+        const btn = e.target.closest(".topup-amount");
+        if (!btn) return;
+        selectedTpmTier = btn.dataset.tier || "day";
+        tpmTiers.querySelectorAll(".topup-amount").forEach((el) => {
+          el.classList.toggle("active", el === btn);
+        });
         syncTpmBuy();
-        const label = radio.closest(".tpm-option")?.querySelector("strong")?.textContent;
-        if (label) notify(`已选择 · ${label}`);
+        notify(`已选择 · ${(TPM_META[selectedTpmTier] || TPM_META.day).label}`);
       });
-    });
+    }
 
     if (buyTpm) {
       buyTpm.addEventListener("click", () => {
-        const tier =
-          document.querySelector('input[name="tpmTier"]:checked')?.value || "day";
-        const map = { day: "按天预付费", hour: "按小时后付费", month: "月保障包" };
-        notify(`前往购买 TPM 保障包 · ${map[tier] || tier}`);
+        notify(`前往购买 TPM 保障包 · ${(TPM_META[selectedTpmTier] || TPM_META.day).label}`);
       });
     }
 
@@ -225,9 +253,13 @@
         renderPlans();
       },
       selectTpmTier(tier) {
-        const radio = document.querySelector(`input[name="tpmTier"][value="${tier}"]`);
-        if (!radio) return;
-        radio.checked = true;
+        if (!TPM_META[tier]) return;
+        selectedTpmTier = tier;
+        if (tpmTiers) {
+          tpmTiers.querySelectorAll(".topup-amount").forEach((el) => {
+            el.classList.toggle("active", el.dataset.tier === tier);
+          });
+        }
         syncTpmBuy();
       },
     };
@@ -348,40 +380,54 @@
       return { conf, plan, needTpm, tpmTier, scale, peak };
     }
 
+    function iconClass(name) {
+      if (/Kimi/i.test(name)) return "icon-kimi";
+      if (/Video|H3/i.test(name)) return "icon-video";
+      if (/DeepSeek/i.test(name)) return "icon-ds";
+      if (/GLM/i.test(name)) return "icon-glm";
+      return "icon-kimi";
+    }
+
     function renderRecommendation() {
       if (!result) return;
       const { conf, plan, needTpm, tpmTier } = buildRecommendation();
       const modelsHtml = conf.models
         .map(
           (m) => `
-          <a class="recommend-model" href="${m.href}">
-            <span>
-              <strong>${m.name}</strong>
-              <span>${m.reason}</span>
-            </span>
-            <em>${m.tag}</em>
-          </a>`
+          <li>
+            <a class="latest-item" href="${m.href}">
+              <span class="latest-icon ${iconClass(m.name)}" aria-hidden="true"></span>
+              <span class="latest-body">
+                <strong>${m.name}</strong>
+                <em>${m.reason}</em>
+              </span>
+              <span class="latest-price">
+                <span>${m.tag}</span>
+              </span>
+            </a>
+          </li>`
         )
         .join("");
 
       const tpmHtml = needTpm
-        ? `<span class="tpm-flag">建议叠加 TPM 保障包 · ${
+        ? `<span class="tpm-flag">建议叠加 TPM · ${
             tpmTier === "month" ? "月保障包" : tpmTier === "day" ? "按天预付费" : "按小时后付费"
           }</span>`
-        : `<span class="tpm-flag" style="color:var(--text-muted);background:rgba(86,98,122,.08)">当前峰值可用共享吞吐，暂可不加 TPM</span>`;
+        : `<span class="tpm-flag is-optional">共享吞吐可满足 · 暂可不加 TPM</span>`;
 
       const videoNote = conf.videoPack
-        ? `<p style="margin-top:8px">视频额度用尽后可叠加「视频模型加购包」（¥99 / ¥299 / ¥999 / ¥2,999）。</p>`
+        ? `<p>视频额度用尽后可叠加「视频模型加购包」。</p>`
         : "";
 
       result.innerHTML = `
-        <div class="recommend-result-head">
-          <h3>${conf.title} · 推荐方案</h3>
-          <p>${conf.summary}</p>
+        <div class="hub-latest-head">
+          <h3>${conf.title}</h3>
+          <a class="text-link" href="#subscribe">去订阅 <span aria-hidden="true">→</span></a>
         </div>
-        <div class="recommend-models">${modelsHtml}</div>
-        <div class="recommend-plan-box">
-          <h4>建议套餐：团队版 ${plan.name} · ${plan.price}${plan.unit}</h4>
+        <p class="recommend-summary">${conf.summary}</p>
+        <ul class="latest-list">${modelsHtml}</ul>
+        <div class="recommend-plan">
+          <h4>建议套餐 · 团队版 ${plan.name} ${plan.price}${plan.unit}</h4>
           <p>${plan.pos}；${plan.benefits.join("；")}</p>
           ${tpmHtml}
           ${videoNote}
@@ -393,17 +439,16 @@
               ? `<a class="btn btn-ghost" href="#tpm" data-apply-tpm="${tpmTier}">购买 TPM 保障包</a>`
               : `<a class="btn btn-ghost" href="#tpm">查看 TPM 保障包</a>`
           }
-          <a class="btn btn-ghost" href="${conf.models[0]?.href || "models.html"}">查看推荐模型</a>
         </div>
       `;
     }
 
     if (chips) {
       chips.addEventListener("click", (e) => {
-        const btn = e.target.closest(".recommend-chip");
+        const btn = e.target.closest(".industry-chip");
         if (!btn) return;
         scene = btn.dataset.scene || "coding";
-        chips.querySelectorAll(".recommend-chip").forEach((el) => {
+        chips.querySelectorAll(".industry-chip").forEach((el) => {
           const on = el === btn;
           el.classList.toggle("active", on);
           el.setAttribute("aria-checked", on ? "true" : "false");
