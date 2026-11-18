@@ -188,8 +188,257 @@
       });
     }
 
+    const buyTpm = document.getElementById("buyTpm");
+    const tpmRadios = document.querySelectorAll('input[name="tpmTier"]');
+
+    function syncTpmBuy() {
+      if (!buyTpm) return;
+      const tier =
+        document.querySelector('input[name="tpmTier"]:checked')?.value || "day";
+      buyTpm.href = `index.html#login?edition=tpm&tier=${encodeURIComponent(tier)}`;
+    }
+
+    tpmRadios.forEach((radio) => {
+      radio.addEventListener("change", () => {
+        syncTpmBuy();
+        const label = radio.closest(".tpm-option")?.querySelector("strong")?.textContent;
+        if (label) notify(`已选择 · ${label}`);
+      });
+    });
+
+    if (buyTpm) {
+      buyTpm.addEventListener("click", () => {
+        const tier =
+          document.querySelector('input[name="tpmTier"]:checked')?.value || "day";
+        const map = { day: "按天预付费", hour: "按小时后付费", month: "月保障包" };
+        notify(`前往购买 TPM 保障包 · ${map[tier] || tier}`);
+      });
+    }
+
+    syncTpmBuy();
     renderPlans();
+
+    return {
+      selectPlan(planId) {
+        if (!planList.some((p) => p.id === planId)) return;
+        selectedPlanId = planId;
+        renderPlans();
+      },
+      selectTpmTier(tier) {
+        const radio = document.querySelector(`input[name="tpmTier"][value="${tier}"]`);
+        if (!radio) return;
+        radio.checked = true;
+        syncTpmBuy();
+      },
+    };
   }
 
-  window.AlayaPlans = { init: initPlans, TEAM_PLANS };
+  const SCENE_RECOMMEND = {
+    coding: {
+      title: "编程研发场景",
+      summary: "偏重代码生成、Agent 编排与长上下文调试，优先高性价比推理与编程旗舰。",
+      models: [
+        { name: "Kimi K3", reason: "长上下文旗舰 · 推理 / 编程 / Agent", href: "models.html?q=Kimi", tag: "主推" },
+        { name: "DeepSeek V3", reason: "高性价比推理与代码", href: "models.html?q=DeepSeek", tag: "性价比" },
+      ],
+      planByScale: { solo: "team-small", small: "team-standard", mid: "team-standard", large: "team-pro" },
+      tpmWhen: ["hard", "steady"],
+    },
+    office: {
+      title: "办公客服场景",
+      summary: "多轮对话、知识问答与工单分流为主，通用对话模型即可覆盖日常吞吐。",
+      models: [
+        { name: "GLM-4.6", reason: "通用对话与办公创作主力", href: "models.html?q=GLM", tag: "主推" },
+        { name: "DeepSeek V3", reason: "成本友好的问答与摘要", href: "models.html?q=DeepSeek", tag: "备用" },
+      ],
+      planByScale: { solo: "team-light", small: "team-small", mid: "team-standard", large: "team-standard" },
+      tpmWhen: ["hard"],
+    },
+    content: {
+      title: "内容创作场景",
+      summary: "文案、脚本与轻量多媒体协同，建议文本主力 + 按需视频额度。",
+      models: [
+        { name: "GLM-4.6", reason: "办公创作与文案生成", href: "models.html?q=GLM", tag: "文案" },
+        { name: "Kimi K3", reason: "长文策划与多文档整理", href: "models.html?q=Kimi", tag: "策划" },
+      ],
+      planByScale: { solo: "team-small", small: "team-standard", mid: "team-standard", large: "team-pro" },
+      tpmWhen: ["hard"],
+    },
+    video: {
+      title: "视频生产场景",
+      summary: "提示词增强、生成与超分闭环，优先含视频额度的席位，并预留加购包。",
+      models: [
+        { name: "Alaya Video / H3", reason: "成片画质与风格控制", href: "video.html", tag: "工作台" },
+        { name: "H3-Highspeed", reason: "日常内容批量试错", href: "generate.html", tag: "效率" },
+      ],
+      planByScale: { solo: "team-standard", small: "team-standard", mid: "team-pro", large: "team-pro" },
+      tpmWhen: ["hard", "steady"],
+      videoPack: true,
+    },
+    auto: {
+      title: "智能座舱场景",
+      summary: "车机多轮对话与云端协同对延迟和高峰敏感，建议高吞吐席位并叠加 TPM。",
+      models: [
+        { name: "Kimi K3", reason: "长上下文车机对话与场景理解", href: "models.html?q=Kimi", tag: "主推" },
+        { name: "GLM-4.6", reason: "座舱助手与内容推荐", href: "models.html?q=GLM", tag: "协同" },
+      ],
+      planByScale: { solo: "team-standard", small: "team-standard", mid: "team-pro", large: "team-pro" },
+      tpmWhen: ["flex", "steady", "hard"],
+      forceTpmOnLarge: true,
+    },
+    finance: {
+      title: "金融研报场景",
+      summary: "研报摘要、合规问答与风控辅助，强调稳定吞吐与审计友好调用。",
+      models: [
+        { name: "DeepSeek V3", reason: "研报摘要与指标抽取", href: "models.html?q=DeepSeek", tag: "分析" },
+        { name: "Kimi K3", reason: "长文档合规审查辅助", href: "models.html?q=Kimi", tag: "合规" },
+      ],
+      planByScale: { solo: "team-small", small: "team-standard", mid: "team-pro", large: "team-pro" },
+      tpmWhen: ["steady", "hard"],
+    },
+    agent: {
+      title: "Agent 高峰场景",
+      summary: "多工具并发与突发峰值明显，默认建议 Pro + TPM 保障包，降低 429 风险。",
+      models: [
+        { name: "Kimi K3", reason: "Agent 编排与长链路推理", href: "models.html?q=Kimi", tag: "主推" },
+        { name: "DeepSeek V3", reason: "工具调用与代码执行备份", href: "models.html?q=DeepSeek", tag: "备份" },
+      ],
+      planByScale: { solo: "team-standard", small: "team-pro", mid: "team-pro", large: "team-pro" },
+      tpmWhen: ["flex", "steady", "hard"],
+    },
+  };
+
+  function initRecommend(options = {}) {
+    const root = document.getElementById("recommend");
+    if (!root) return;
+
+    const chips = document.getElementById("recommendScenes");
+    const scaleEl = document.getElementById("recommendScale");
+    const peakEl = document.getElementById("recommendPeak");
+    const runBtn = document.getElementById("recommendRun");
+    const result = document.getElementById("recommendResult");
+    const notify =
+      options.showToast ||
+      ((msg) => {
+        const toast = document.getElementById("toast");
+        if (!toast) return;
+        toast.textContent = msg;
+        toast.classList.add("show");
+        clearTimeout(toast._timer);
+        toast._timer = setTimeout(() => toast.classList.remove("show"), 2200);
+      });
+
+    let scene = "coding";
+    let plansApi = options.plansApi || null;
+
+    function currentScene() {
+      return SCENE_RECOMMEND[scene] || SCENE_RECOMMEND.coding;
+    }
+
+    function buildRecommendation() {
+      const conf = currentScene();
+      const scale = scaleEl?.value || "small";
+      const peak = peakEl?.value || "flex";
+      const planId = conf.planByScale[scale] || "team-standard";
+      const plan = TEAM_PLANS.find((p) => p.id === planId) || TEAM_PLANS[2];
+      let needTpm = conf.tpmWhen.includes(peak);
+      if (conf.forceTpmOnLarge && (scale === "mid" || scale === "large")) needTpm = true;
+      if (scene === "agent") needTpm = true;
+      const tpmTier = peak === "hard" || scale === "large" ? "month" : peak === "steady" ? "day" : "hour";
+      return { conf, plan, needTpm, tpmTier, scale, peak };
+    }
+
+    function renderRecommendation() {
+      if (!result) return;
+      const { conf, plan, needTpm, tpmTier } = buildRecommendation();
+      const modelsHtml = conf.models
+        .map(
+          (m) => `
+          <a class="recommend-model" href="${m.href}">
+            <span>
+              <strong>${m.name}</strong>
+              <span>${m.reason}</span>
+            </span>
+            <em>${m.tag}</em>
+          </a>`
+        )
+        .join("");
+
+      const tpmHtml = needTpm
+        ? `<span class="tpm-flag">建议叠加 TPM 保障包 · ${
+            tpmTier === "month" ? "月保障包" : tpmTier === "day" ? "按天预付费" : "按小时后付费"
+          }</span>`
+        : `<span class="tpm-flag" style="color:var(--text-muted);background:rgba(86,98,122,.08)">当前峰值可用共享吞吐，暂可不加 TPM</span>`;
+
+      const videoNote = conf.videoPack
+        ? `<p style="margin-top:8px">视频额度用尽后可叠加「视频模型加购包」（¥99 / ¥299 / ¥999 / ¥2,999）。</p>`
+        : "";
+
+      result.innerHTML = `
+        <div class="recommend-result-head">
+          <h3>${conf.title} · 推荐方案</h3>
+          <p>${conf.summary}</p>
+        </div>
+        <div class="recommend-models">${modelsHtml}</div>
+        <div class="recommend-plan-box">
+          <h4>建议套餐：团队版 ${plan.name} · ${plan.price}${plan.unit}</h4>
+          <p>${plan.pos}；${plan.benefits.join("；")}</p>
+          ${tpmHtml}
+          ${videoNote}
+        </div>
+        <div class="recommend-actions">
+          <a class="btn btn-primary" href="#subscribe" data-apply-plan="${plan.id}">去购买 · ${plan.name}</a>
+          ${
+            needTpm
+              ? `<a class="btn btn-ghost" href="#tpm" data-apply-tpm="${tpmTier}">购买 TPM 保障包</a>`
+              : `<a class="btn btn-ghost" href="#tpm">查看 TPM 保障包</a>`
+          }
+          <a class="btn btn-ghost" href="${conf.models[0]?.href || "models.html"}">查看推荐模型</a>
+        </div>
+      `;
+    }
+
+    if (chips) {
+      chips.addEventListener("click", (e) => {
+        const btn = e.target.closest(".recommend-chip");
+        if (!btn) return;
+        scene = btn.dataset.scene || "coding";
+        chips.querySelectorAll(".recommend-chip").forEach((el) => {
+          const on = el === btn;
+          el.classList.toggle("active", on);
+          el.setAttribute("aria-checked", on ? "true" : "false");
+        });
+      });
+    }
+
+    if (runBtn) {
+      runBtn.addEventListener("click", () => {
+        renderRecommendation();
+        notify(`已生成 · ${currentScene().title}推荐`);
+        result?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      });
+    }
+
+    if (result) {
+      result.addEventListener("click", (e) => {
+        const planBtn = e.target.closest("[data-apply-plan]");
+        if (planBtn && plansApi?.selectPlan) {
+          plansApi.selectPlan(planBtn.dataset.applyPlan);
+          notify("已同步选中推荐套餐");
+        }
+        const tpmBtn = e.target.closest("[data-apply-tpm]");
+        if (tpmBtn && plansApi?.selectTpmTier) {
+          plansApi.selectTpmTier(tpmBtn.dataset.applyTpm);
+          notify("已同步 TPM 计费方式");
+        }
+      });
+    }
+  }
+
+  window.AlayaPlans = {
+    init: initPlans,
+    initRecommend,
+    TEAM_PLANS,
+    SCENE_RECOMMEND,
+  };
 })();
