@@ -331,14 +331,14 @@
 
   if (window.AlayaPlans) {
     const toast = document.getElementById("toast");
-    window.AlayaPlans.init({
-      showToast: (msg) => {
-        if (!toast) return;
-        toast.textContent = msg;
-        toast.classList.add("show");
-        clearTimeout(toast._timer);
-        toast._timer = setTimeout(() => toast.classList.remove("show"), 2200);
-      },
-    });
+    const showToast = (msg) => {
+      if (!toast) return;
+      toast.textContent = msg;
+      toast.classList.add("show");
+      clearTimeout(toast._timer);
+      toast._timer = setTimeout(() => toast.classList.remove("show"), 2200);
+    };
+    const plansApi = window.AlayaPlans.init({ showToast });
+    window.AlayaPlans.initRecommend({ showToast, plansApi });
   }
 })();
