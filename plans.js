@@ -1,46 +1,38 @@
 (() => {
   const TEAM_PLANS = [
     {
-      id: "team-light",
-      name: "Light",
-      price: "¥150",
-      unit: "/席/月",
-      video: "不含视频模型",
-      hasVideo: false,
-      benefits: ["25,000 Credits", "共享吞吐起步", "不含视频模型"],
-      pos: "个人→团队试用、流程验证；非生产主力",
+      id: "ent-lite",
+      name: "轻量型",
+      price: "¥2999.00",
+      unit: "/月",
+      benefits: ["多模型混合调用", "按模型单价实时扣减", "约可支撑 29.84 亿 Tokens/月"],
+      pos: "轻量接入与内部工具场景",
     },
     {
-      id: "team-small",
-      name: "Small",
-      price: "¥300",
-      unit: "/席/月",
-      video: "不含视频模型",
-      hasVideo: false,
-      benefits: ["50,000 Credits", "适合小团队协作", "不含视频模型", "建议起购 3 席"],
-      pos: "小团队轻量协作",
+      id: "ent-standard",
+      name: "标准型",
+      price: "¥3999.00",
+      unit: "/月",
+      benefits: ["中高频开发支持", "内容生成 · 工作流", "约可支撑 39.79 亿 Tokens/月"],
+      pos: "中高频开发、内容生成与工作流接入",
     },
     {
-      id: "team-standard",
-      name: "Standard",
-      price: "¥550",
-      unit: "/席/月",
-      video: "含视频额度 ¥200",
-      hasVideo: true,
+      id: "ent-pro",
+      name: "专业型",
+      price: "¥9999.00",
+      unit: "/月",
       featured: true,
-      badge: "主推",
-      benefits: ["100,000 Credits", "含文本/视频/图片", "含视频额度 ¥200（增强+生成+超分）"],
-      pos: "研发/数据默认主力席位",
+      badge: "企业主推",
+      benefits: ["高频批量调用", "团队级项目 · 生产环境", "约可支撑 99.5 亿 Tokens/月"],
+      pos: "高频批量调用、团队级项目与生产环境",
     },
     {
-      id: "team-pro",
-      name: "Pro",
-      price: "¥1,298",
-      unit: "/席/月",
-      video: "含视频额度 ¥500",
-      hasVideo: true,
-      benefits: ["250,000 Credits", "高吞吐共享容量", "含文本/视频/图片", "含视频额度 ¥500（增强+生成+超分）"],
-      pos: "重度核心 / 内容生产席位",
+      id: "ent-custom",
+      name: "定制型",
+      price: "按需定制",
+      unit: "",
+      benefits: ["专属模型组合", "团队席位灵活配置", "企业级 SLA 支持"],
+      pos: "按业务需求定制模型组合与团队席位",
     },
   ];
 
@@ -204,73 +196,64 @@
       title: "编程研发场景",
       summary: "偏重代码生成、Agent 编排与长上下文调试，优先高性价比推理与编程旗舰。",
       models: [
-        { name: "Kimi K3", reason: "长上下文旗舰 · 推理 / 编程 / Agent", href: "models.html?q=Kimi", tag: "主推" },
-        { name: "DeepSeek V3", reason: "高性价比推理与代码", href: "models.html?q=DeepSeek", tag: "性价比" },
+        { name: "Kimi K3", reason: "长上下文旗舰 · 推理 / 编程 / Agent", href: "#experience", tag: "主推" },
+        { name: "DeepSeek-V4 Flash", reason: "高性价比推理与代码加速", href: "#experience", tag: "性价比" },
       ],
-      planByScale: { solo: "team-small", small: "team-standard", mid: "team-standard", large: "team-pro" },
-      tpmWhen: ["hard", "steady"],
+      planByScale: { solo: "ent-lite", small: "ent-standard", mid: "ent-standard", large: "ent-pro" },
     },
     office: {
       title: "办公客服场景",
       summary: "多轮对话、知识问答与工单分流为主，通用对话模型即可覆盖日常吞吐。",
       models: [
-        { name: "GLM-4.6", reason: "通用对话与办公创作主力", href: "models.html?q=GLM", tag: "主推" },
-        { name: "DeepSeek V3", reason: "成本友好的问答与摘要", href: "models.html?q=DeepSeek", tag: "备用" },
+        { name: "GLM-5.2", reason: "通用对话与办公创作主力", href: "#experience", tag: "主推" },
+        { name: "DeepSeek-V4 Flash", reason: "成本友好的问答与摘要", href: "#experience", tag: "备用" },
       ],
-      planByScale: { solo: "team-light", small: "team-small", mid: "team-standard", large: "team-standard" },
-      tpmWhen: ["hard"],
+      planByScale: { solo: "ent-lite", small: "ent-lite", mid: "ent-standard", large: "ent-standard" },
     },
     content: {
       title: "内容创作场景",
-      summary: "文案、脚本与轻量多媒体协同，建议文本主力 + 按需视频额度。",
+      summary: "文案、脚本与轻量多媒体协同，建议文本主力模型覆盖创作链路。",
       models: [
-        { name: "GLM-4.6", reason: "办公创作与文案生成", href: "models.html?q=GLM", tag: "文案" },
-        { name: "Kimi K3", reason: "长文策划与多文档整理", href: "models.html?q=Kimi", tag: "策划" },
+        { name: "GLM-5.2", reason: "办公创作与文案生成", href: "#experience", tag: "文案" },
+        { name: "Kimi K3", reason: "长文策划与多文档整理", href: "#experience", tag: "策划" },
       ],
-      planByScale: { solo: "team-small", small: "team-standard", mid: "team-standard", large: "team-pro" },
-      tpmWhen: ["hard"],
+      planByScale: { solo: "ent-lite", small: "ent-standard", mid: "ent-standard", large: "ent-pro" },
     },
     video: {
       title: "视频生产场景",
-      summary: "提示词增强、生成与超分闭环，优先含视频额度的席位，并预留加购包。",
+      summary: "内容生产与多媒体协同，建议标准型及以上套餐支撑高频调用。",
       models: [
-        { name: "Alaya Video / H3", reason: "成片画质与风格控制", href: "video.html", tag: "工作台" },
-        { name: "H3-Highspeed", reason: "日常内容批量试错", href: "generate.html", tag: "效率" },
+        { name: "Kimi K3", reason: "脚本策划与长文理解", href: "#experience", tag: "策划" },
+        { name: "GLM-5.2", reason: "文案与分镜辅助", href: "#experience", tag: "文案" },
       ],
-      planByScale: { solo: "team-standard", small: "team-standard", mid: "team-pro", large: "team-pro" },
-      tpmWhen: ["hard", "steady"],
-      videoPack: true,
+      planByScale: { solo: "ent-standard", small: "ent-standard", mid: "ent-pro", large: "ent-pro" },
     },
     auto: {
       title: "智能座舱场景",
-      summary: "车机多轮对话与云端协同对延迟和高峰敏感，建议高吞吐席位并叠加 TPM。",
+      summary: "车机多轮对话与云端协同对延迟和高峰敏感，建议专业型高吞吐套餐。",
       models: [
-        { name: "Kimi K3", reason: "长上下文车机对话与场景理解", href: "models.html?q=Kimi", tag: "主推" },
-        { name: "GLM-4.6", reason: "座舱助手与内容推荐", href: "models.html?q=GLM", tag: "协同" },
+        { name: "Kimi K3", reason: "长上下文车机对话与场景理解", href: "#experience", tag: "主推" },
+        { name: "GLM-5.2", reason: "座舱助手与内容推荐", href: "#experience", tag: "协同" },
       ],
-      planByScale: { solo: "team-standard", small: "team-standard", mid: "team-pro", large: "team-pro" },
-      tpmWhen: ["flex", "steady", "hard"],
-      forceTpmOnLarge: true,
+      planByScale: { solo: "ent-standard", small: "ent-standard", mid: "ent-pro", large: "ent-pro" },
     },
     finance: {
       title: "金融研报场景",
       summary: "研报摘要、合规问答与风控辅助，强调稳定吞吐与审计友好调用。",
       models: [
-        { name: "DeepSeek V3", reason: "研报摘要与指标抽取", href: "models.html?q=DeepSeek", tag: "分析" },
-        { name: "Kimi K3", reason: "长文档合规审查辅助", href: "models.html?q=Kimi", tag: "合规" },
+        { name: "DeepSeek-V4 Flash", reason: "研报摘要与指标抽取", href: "#experience", tag: "分析" },
+        { name: "Kimi K3", reason: "长文档合规审查辅助", href: "#experience", tag: "合规" },
       ],
-      planByScale: { solo: "team-small", small: "team-standard", mid: "team-pro", large: "team-pro" },
-      tpmWhen: ["steady", "hard"],
+      planByScale: { solo: "ent-lite", small: "ent-standard", mid: "ent-pro", large: "ent-custom" },
     },
     agent: {
       title: "Agent 高峰场景",
-      summary: "多工具并发与突发峰值明显，默认建议 Pro + TPM 保障包，降低 429 风险。",
+      summary: "多工具并发与突发峰值明显，默认建议专业型或定制型支撑生产高峰。",
       models: [
-        { name: "Kimi K3", reason: "Agent 编排与长链路推理", href: "models.html?q=Kimi", tag: "主推" },
-        { name: "DeepSeek V3", reason: "工具调用与代码执行备份", href: "models.html?q=DeepSeek", tag: "备份" },
+        { name: "Kimi K3", reason: "Agent 编排与长链路推理", href: "#experience", tag: "主推" },
+        { name: "DeepSeek-V4 Flash", reason: "工具调用与代码执行备份", href: "#experience", tag: "备份" },
       ],
-      planByScale: { solo: "team-standard", small: "team-pro", mid: "team-pro", large: "team-pro" },
-      tpmWhen: ["flex", "steady", "hard"],
+      planByScale: { solo: "ent-standard", small: "ent-pro", mid: "ent-pro", large: "ent-custom" },
     },
   };
 
@@ -304,14 +287,9 @@
     function buildRecommendation() {
       const conf = currentScene();
       const scale = scaleEl?.value || "small";
-      const peak = peakEl?.value || "flex";
-      const planId = conf.planByScale[scale] || "team-standard";
-      const plan = TEAM_PLANS.find((p) => p.id === planId) || TEAM_PLANS[2];
-      let needTpm = conf.tpmWhen.includes(peak);
-      if (conf.forceTpmOnLarge && (scale === "mid" || scale === "large")) needTpm = true;
-      if (scene === "agent") needTpm = true;
-      const tpmTier = peak === "hard" || scale === "large" ? "month" : peak === "steady" ? "day" : "hour";
-      return { conf, plan, needTpm, tpmTier, scale, peak };
+      const planId = conf.planByScale[scale] || "ent-standard";
+      const plan = TEAM_PLANS.find((p) => p.id === planId) || TEAM_PLANS[1];
+      return { conf, plan, scale };
     }
 
     function iconClass(name) {
@@ -324,7 +302,7 @@
 
     function renderRecommendation() {
       if (!result) return;
-      const { conf, plan, needTpm, tpmTier } = buildRecommendation();
+      const { conf, plan } = buildRecommendation();
       const modelsHtml = conf.models
         .map(
           (m) => `
@@ -343,16 +321,6 @@
         )
         .join("");
 
-      const tpmHtml = needTpm
-        ? `<span class="tpm-flag">建议叠加 TPM · ${
-            tpmTier === "month" ? "月保障包" : tpmTier === "day" ? "按天预付费" : "按小时后付费"
-          }</span>`
-        : `<span class="tpm-flag is-optional">共享吞吐可满足 · 暂可不加 TPM</span>`;
-
-      const videoNote = conf.videoPack
-        ? `<p>视频额度用尽后可叠加「视频模型加购包」。</p>`
-        : "";
-
       result.innerHTML = `
         <div class="hub-latest-head">
           <h3>${conf.title}</h3>
@@ -361,18 +329,12 @@
         <p class="recommend-summary">${conf.summary}</p>
         <ul class="latest-list">${modelsHtml}</ul>
         <div class="recommend-plan">
-          <h4>建议套餐 · 团队版 ${plan.name} ${plan.price}${plan.unit}</h4>
+          <h4>建议套餐 · 企业版 ${plan.name} ${plan.price}${plan.unit}</h4>
           <p>${plan.pos}；${plan.benefits.join("；")}</p>
-          ${tpmHtml}
-          ${videoNote}
         </div>
         <div class="recommend-actions">
           <a class="btn btn-primary" href="#subscribe" data-apply-plan="${plan.id}">去购买 · ${plan.name}</a>
-          ${
-            needTpm
-              ? `<a class="btn btn-ghost" href="#subscribe">了解更多</a>`
-              : `<a class="btn btn-ghost" href="#subscribe">了解更多</a>`
-          }
+          <a class="btn btn-ghost" href="#subscribe">了解更多</a>
         </div>
       `;
     }
@@ -404,11 +366,6 @@
         if (planBtn && plansApi?.selectPlan) {
           plansApi.selectPlan(planBtn.dataset.applyPlan);
           notify("已同步选中推荐套餐");
-        }
-        const tpmBtn = e.target.closest("[data-apply-tpm]");
-        if (tpmBtn && plansApi?.selectTpmTier) {
-          plansApi.selectTpmTier(tpmBtn.dataset.applyTpm);
-          notify("已同步 TPM 计费方式");
         }
       });
     }
