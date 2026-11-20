@@ -309,31 +309,10 @@
   margin-bottom: 22px;
 }
 
-.at-cap-tools {
+.at-tools-only {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 18px;
-  align-items: start;
-}
-
-.at-cap-tools .at-cap-list::before,
-.at-tools-mini::before {
-  display: block;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  margin-bottom: 4px;
-  grid-column: 1 / -1;
-}
-
-.at-cap-tools .at-cap-list::before {
-  content: "Models";
-}
-
-.at-tools-mini::before {
-  content: "Tools";
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
 }
 
 /* —— 3. Model capability showcase —— */
@@ -783,9 +762,9 @@
 }
 
 @media (max-width: 960px) {
-  .at-cap-tools,
+  .at-tools-only,
   .at-model-showcase {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 
   .at-float-side {
@@ -817,6 +796,7 @@
 
 @media (max-width: 640px) {
   .at-ent-grid,
+  .at-tools-only,
   .at-tools-mini {
     grid-template-columns: 1fr;
   }
