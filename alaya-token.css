@@ -2,10 +2,12 @@
 
 .at-landing .site-header {
   background: rgba(255, 255, 255, 0.9);
+  top: 0;
 }
 
-.at-landing .notice-bar a {
-  color: var(--accent);
+.at-landing .site-header.is-stuck,
+.at-landing .site-header {
+  margin-top: 0;
 }
 
 /* —— 1. Hero: centered copy + blue banner carousel —— */
