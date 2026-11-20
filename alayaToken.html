@@ -311,64 +311,93 @@
       </div>
     </section>
 
-    <!-- 5. 套餐 -->
+    <!-- 5. 企业版套餐 -->
     <section class="section subscribe-section plans-section" id="subscribe" aria-labelledby="subscribe-title">
       <div class="section-inner">
-        <p class="section-label reveal">Packages</p>
-        <h2 class="section-title reveal" id="subscribe-title">套餐与适用场景</h2>
-        <p class="section-desc reveal">团队按席位订阅；Standard / Pro 含视频额度，可按需加购视频包。</p>
+        <p class="section-label reveal">Enterprise</p>
+        <h2 class="section-title reveal" id="subscribe-title">企业版套餐</h2>
+        <p class="section-desc reveal">按业务规模选择档位，首月加赠额度，多模型混合调用按单价实时扣减。</p>
 
-        <article class="subscribe-block reveal" aria-labelledby="home-team-title">
-          <div class="team-plans-head">
-            <h3 id="home-team-title">Alaya 团队版 · 套餐总表</h3>
-            <p>席位订阅含 Credits 与吞吐上限；Standard / Pro 含视频额度，可按需加购视频包。</p>
-          </div>
+        <div class="at-ent-grid reveal" id="home-team-title">
+          <article class="at-ent-card">
+            <header class="at-ent-head">
+              <h3>轻量型</h3>
+              <span class="at-ent-badge">敬请期待</span>
+            </header>
+            <p class="at-ent-desc">轻量接入与内部工具场景</p>
+            <p class="at-ent-price"><strong>¥2999.00</strong><span>/月</span></p>
+            <div class="at-ent-promo">
+              <p>首月额外赠送 <em>15%</em></p>
+              <p>最高赠送 <em>¥450</em></p>
+              <p>次月起赠送 <em>5%</em></p>
+            </div>
+            <ul class="at-ent-features">
+              <li>多模型混合调用</li>
+              <li>按模型单价实时扣减</li>
+              <li>新模型持续上新</li>
+            </ul>
+            <p class="at-ent-foot">约可支撑 29.84 亿 Tokens/月</p>
+          </article>
 
-          <div class="billing-table-wrap">
-            <table class="billing-table subscribe-table team-matrix-table">
-              <thead>
-                <tr>
-                  <th>套餐</th>
-                  <th>价格</th>
-                  <th>权益要点</th>
-                  <th>定位</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Light</td>
-                  <td>¥150 /席/月</td>
-                  <td>25,000 Credits；TPM 不保障（或 ≤2,000）；不含视频模型</td>
-                  <td>个人→团队试用、流程验证；非生产主力</td>
-                </tr>
-                <tr>
-                  <td>Small</td>
-                  <td>¥300 /席/月</td>
-                  <td>50,000 Credits；TPM 5,000；不含视频模型；建议起购 3 席</td>
-                  <td>小团队轻量协作</td>
-                </tr>
-                <tr class="is-featured-row">
-                  <td>Standard <span class="table-badge">主推</span></td>
-                  <td>¥550 /席/月</td>
-                  <td>100,000 Credits；TPM 20,000；含文本/视频/图片模型；含视频额度 ¥200</td>
-                  <td>研发/数据默认主力席位</td>
-                </tr>
-                <tr>
-                  <td>Pro</td>
-                  <td>¥1,298 /席/月</td>
-                  <td>250,000 Credits；共享吞吐上限 TPM 50,000；含文本/视频/图片；视频额度 ¥500</td>
-                  <td>重度核心 / 内容生产席位</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <article class="at-ent-card">
+            <header class="at-ent-head">
+              <h3>标准型</h3>
+              <span class="at-ent-badge">敬请期待</span>
+            </header>
+            <p class="at-ent-desc">中高频开发、内容生成与工作流接入</p>
+            <p class="at-ent-price"><strong>¥3999.00</strong><span>/月</span></p>
+            <div class="at-ent-promo">
+              <p>首月额外赠送 <em>20%</em></p>
+              <p>最高赠送 <em>¥800</em></p>
+              <p>次月起赠送 <em>10%</em></p>
+            </div>
+            <ul class="at-ent-features">
+              <li>多模型混合调用</li>
+              <li>中高频开发支持</li>
+              <li>内容生成 · 工作流</li>
+            </ul>
+            <p class="at-ent-foot">约可支撑 39.79 亿 Tokens/月</p>
+          </article>
 
-          <div class="plans-grid" id="plansGrid"></div>
-          <a class="btn btn-primary plans-inline-buy" id="buyTeam" href="#login">
-            去订阅 · 团队版
-            <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
-          </a>
-        </article>
+          <article class="at-ent-card is-featured">
+            <header class="at-ent-head">
+              <h3>专业型</h3>
+              <span class="at-ent-badge at-ent-badge-hot">企业主推</span>
+            </header>
+            <p class="at-ent-desc">高频批量调用、团队级项目与生产环境</p>
+            <p class="at-ent-price"><strong>¥9999.00</strong><span>/月</span></p>
+            <div class="at-ent-promo">
+              <p>首月额外赠送 <em>50%</em></p>
+              <p>最高赠送 <em>¥5000</em></p>
+              <p>次月起赠送 <em>5%</em></p>
+            </div>
+            <ul class="at-ent-features">
+              <li>高频批量调用</li>
+              <li>团队级项目 · 生产环境</li>
+              <li>新模型优先体验</li>
+            </ul>
+            <p class="at-ent-foot">约可支撑 99.5 亿 Tokens/月</p>
+          </article>
+
+          <article class="at-ent-card">
+            <header class="at-ent-head">
+              <h3>定制型</h3>
+            </header>
+            <p class="at-ent-desc">按业务需求定制模型组合与团队席位</p>
+            <p class="at-ent-price at-ent-price-custom"><strong>按需定制</strong></p>
+            <div class="at-ent-promo">
+              <p>模型组合：可定制</p>
+              <p>团队席位：可定制</p>
+              <p>对接：官网 / 商务联系</p>
+            </div>
+            <ul class="at-ent-features">
+              <li>专属模型组合</li>
+              <li>团队席位灵活配置</li>
+              <li>企业级 SLA 支持</li>
+            </ul>
+            <p class="at-ent-foot">Token 用量按需配置</p>
+          </article>
+        </div>
       </div>
     </section>
 
