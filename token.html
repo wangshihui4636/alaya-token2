@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alaya Token — Kimi 3.0 Pro 首发体验</title>
-  <meta name="description" content="Kimi 3.0 Pro 首发上线 Alaya Token：智能推荐与能力工具、模型体验入口、元创计划、套餐订购与安全稳定。" />
+  <title>Alaya Token — 一个 API 聚合多家大模型</title>
+  <meta name="description" content="Alaya Token：一个 API 聚合多家大模型，按需切换、按量付费；智能推荐、工具链支持、企业套餐与安全稳定一站完成。" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
@@ -16,11 +16,6 @@
 </head>
 <body class="at-landing">
   <div class="page-glow" aria-hidden="true"></div>
-  <div class="notice-bar">
-    <span class="notice-dot" aria-hidden="true"></span>
-    Kimi 3.0 Pro 首发上线 Token Plan
-    <a href="#experience">立即体验 →</a>
-  </div>
 
   <header class="site-header">
     <a class="logo" href="alayaToken.html">
@@ -30,6 +25,7 @@
     <nav class="header-nav" aria-label="主导航">
       <a href="#experience">模型能力</a>
       <a href="#subscribe">套餐</a>
+      <a href="#docs">文档</a>
       <a class="btn btn-primary" href="#login">
         登录
         <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
@@ -38,15 +34,15 @@
   </header>
 
   <main>
-    <!-- 1. 首屏：居中标题 + 蓝色大卡轮播（参考 Token Plan 广告首屏） -->
+    <!-- 1. 首屏：平台价值 + 模型轮播 -->
     <section class="at-hero-qwen" id="hero" aria-labelledby="hero-title">
       <div class="at-hero-qwen-inner">
         <div class="at-hero-qwen-copy">
-          <h1 id="hero-title">Kimi 3.0 Pro 已就位!</h1>
+          <h1 id="hero-title">一个 API，接入顶级开源大模型</h1>
           <p class="at-hero-qwen-lead">
-            新客首购 Token Plan 低至 5 折，模型与 Agent 能力一次配齐，多档套餐灵活选。
+            聚合 Kimi、GLM、DeepSeek 等多家模型，按需切换、按量付费，企业套餐灵活选。
           </p>
-          <a class="at-hero-pill" href="#experience">立即体验</a>
+          <a class="at-hero-pill" href="#experience">了解模型</a>
         </div>
 
         <div class="at-hero-banner" id="heroBanner" data-index="0">
@@ -67,7 +63,7 @@
               </div>
               <div class="at-float at-float-main">
                 <span class="at-float-glow" aria-hidden="true"></span>
-                <strong>Kimi<br />3.0 PRO</strong>
+                <strong>Kimi<br />K3</strong>
               </div>
               <div class="at-float at-float-chat" aria-hidden="true">
                 <span>What do you want to create?</span>
@@ -76,17 +72,17 @@
 
             <article class="at-hero-slide" data-slide="1" hidden>
               <div class="at-float at-float-side" aria-hidden="true">
-                <span class="at-float-label">Image</span>
+                <span class="at-float-label">Office</span>
                 <div class="at-float-dots at-float-dots-warm">
                   <i></i><i></i><i></i><i></i><i></i><i></i>
                 </div>
               </div>
               <div class="at-float at-float-main at-float-main-alt">
                 <span class="at-float-glow" aria-hidden="true"></span>
-                <strong>Seedream<br />5.5</strong>
+                <strong>GLM<br />5.2</strong>
               </div>
               <div class="at-float at-float-chat" aria-hidden="true">
-                <span>Generate a 4K product shot</span>
+                <span>Draft a product brief</span>
               </div>
             </article>
 
@@ -99,7 +95,7 @@
               </div>
               <div class="at-float at-float-main at-float-main-ds">
                 <span class="at-float-glow" aria-hidden="true"></span>
-                <strong>DeepSeek<br />系列</strong>
+                <strong>DeepSeek<br />V4 Flash</strong>
               </div>
               <div class="at-float at-float-chat" aria-hidden="true">
                 <span>Refactor this Python service</span>
@@ -288,7 +284,7 @@
           <aside class="hub-intro">
             <span class="hub-eyebrow">Limited Offer</span>
             <h2>新客与创作者加码进行中</h2>
-            <p>Kimi 3.0 Pro 首发档期内，个人充值加赠、团队席位限时报名；符合元创计划资格可叠加活动额度。</p>
+            <p>元创计划进行中：企业套餐限时报名，符合资格可叠加活动额度，降低首次付费门槛。</p>
             <div class="hub-intro-actions">
               <a class="btn btn-primary" href="#subscribe">
                 查看优惠并订阅
@@ -308,7 +304,7 @@
             <ul class="hub-latest-list" style="list-style:none;display:grid;gap:12px;padding:0;margin:0">
               <li class="at-cap-item">
                 <h3>个人档加赠</h3>
-                <p>Lite / Plus / Max 限时额度加量不加价，充值即用 Kimi 3.0 Pro。</p>
+                <p>企业档限时加赠，额度加量不加价，多模型统一按量扣减。</p>
               </li>
               <li class="at-cap-item">
                 <h3>企业席位限时报名</h3>
@@ -443,7 +439,7 @@
         <aside class="hub-intro reliability-cta reveal">
           <span class="hub-eyebrow">Ready</span>
           <h2>准备好了？从体验到订阅</h2>
-          <p>先试 Kimi 3.0 Pro，再按场景选套餐完成订阅。</p>
+          <p>先了解模型能力，再按场景选企业套餐完成订阅。</p>
           <div class="hub-intro-actions">
             <a class="btn btn-primary" href="#experience">
               查看模型能力
@@ -457,6 +453,37 @@
         </aside>
       </div>
     </section>
+
+    <!-- 文档入口 -->
+    <section class="section" id="docs" aria-labelledby="docs-title">
+      <div class="section-inner">
+        <p class="section-label reveal">Docs</p>
+        <h2 class="section-title reveal" id="docs-title">开发文档</h2>
+        <p class="section-desc reveal">快速接入 API、切换模型与对接主流工具链。</p>
+        <div class="at-tools-mini at-tools-only reveal">
+          <article class="at-tool-mini">
+            <h4>快速开始</h4>
+            <p>获取密钥、配置 Base URL，几分钟完成首次调用。</p>
+            <a class="text-link" href="#login">查看指南 →</a>
+          </article>
+          <article class="at-tool-mini">
+            <h4>API 参考</h4>
+            <p>兼容 OpenAI / Anthropic 风格接口，现有 SDK 几乎零改造。</p>
+            <a class="text-link" href="#login">打开 API 文档 →</a>
+          </article>
+          <article class="at-tool-mini">
+            <h4>工具对接</h4>
+            <p>OpenClaw、Claude Code、Codex、OpenCode 接入说明。</p>
+            <a class="text-link" href="#capabilities">查看工具链 →</a>
+          </article>
+          <article class="at-tool-mini">
+            <h4>计费说明</h4>
+            <p>企业套餐权益、按量扣减与发票报销路径说明。</p>
+            <a class="text-link" href="#subscribe">查看套餐 →</a>
+          </article>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
@@ -468,6 +495,7 @@
       <nav class="footer-nav" aria-label="页脚">
         <a href="#recommend">智能推荐</a>
         <a href="#experience">模型能力</a>
+        <a href="#docs">文档</a>
         <a href="#campaign">元创计划</a>
         <a href="#subscribe">套餐</a>
         <a href="#reliability">安全</a>
