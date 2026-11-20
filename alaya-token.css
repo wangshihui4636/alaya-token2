@@ -164,11 +164,112 @@
   max-width: 1120px;
 }
 
+.at-screen2-cap {
+  margin-top: 56px;
+  padding-top: 40px;
+  border-top: 1px solid var(--border);
+}
+
+.at-screen2-cap-head {
+  margin-bottom: 22px;
+}
+
 .at-cap-tools {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   gap: 18px;
   align-items: start;
+}
+
+/* —— 3. Experience entry —— */
+.at-experience-section {
+  background:
+    radial-gradient(ellipse 50% 40% at 20% 0%, rgba(53, 99, 245, 0.07), transparent 60%),
+    transparent;
+}
+
+.at-experience-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.at-experience-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 24px 22px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: var(--shadow-sm);
+  color: inherit;
+  transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease), transform 0.2s var(--ease);
+}
+
+.at-experience-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.at-experience-card.is-featured {
+  grid-row: span 2;
+  background:
+    linear-gradient(145deg, rgba(53, 99, 245, 0.08), rgba(255, 255, 255, 0.95) 45%),
+    #fff;
+  border-color: var(--border-strong);
+  justify-content: center;
+  min-height: 280px;
+}
+
+.at-experience-badge {
+  align-self: flex-start;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent-bright), var(--accent));
+}
+
+.at-experience-card h3 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 720;
+  letter-spacing: -0.02em;
+}
+
+.at-experience-card.is-featured h3 {
+  font-size: 26px;
+}
+
+.at-experience-card p {
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.65;
+  flex: 1;
+}
+
+.at-experience-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 650;
+  color: var(--accent);
+}
+
+.at-experience-cta svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .at-cap-list {
@@ -231,71 +332,16 @@
   font-size: 11px;
 }
 
-/* reimbursement */
-.at-reimburse-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
-  margin-bottom: 22px;
-}
-
-.at-reimburse-card {
-  padding: 20px;
-  border-radius: 18px;
-  border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: var(--shadow-sm);
-}
-
-.at-reimburse-card .step {
-  display: inline-flex;
-  width: 28px;
-  height: 28px;
-  border-radius: 999px;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 12px;
-  background: var(--accent-soft);
-  color: var(--accent);
-  font-size: 13px;
-  font-weight: 720;
-}
-
-.at-reimburse-card h3 {
-  font-size: 16px;
-  margin-bottom: 6px;
-}
-
-.at-reimburse-card p {
-  font-size: 13px;
-  color: var(--text-muted);
-  line-height: 1.6;
-}
-
-.at-reimburse-cta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px 22px;
-  border-radius: 18px;
-  border: 1px solid var(--border-strong);
-  background:
-    linear-gradient(120deg, rgba(53, 99, 245, 0.08), rgba(10, 143, 173, 0.05)),
-    #fff;
-}
-
-.at-reimburse-cta p {
-  color: var(--text-muted);
-  font-size: 14px;
-  max-width: 560px;
-}
-
 @media (max-width: 960px) {
   .at-ad-main,
-  .at-cap-tools {
+  .at-cap-tools,
+  .at-experience-grid {
     grid-template-columns: 1fr;
+  }
+
+  .at-experience-card.is-featured {
+    grid-row: auto;
+    min-height: 0;
   }
 
   .at-ad-visual {
@@ -303,8 +349,7 @@
     order: -1;
   }
 
-  .at-ad-strip,
-  .at-reimburse-grid {
+  .at-ad-strip {
     grid-template-columns: 1fr 1fr;
   }
 
@@ -315,8 +360,7 @@
 
 @media (max-width: 640px) {
   .at-ad-strip,
-  .at-tools-mini,
-  .at-reimburse-grid {
+  .at-tools-mini {
     grid-template-columns: 1fr;
   }
 
@@ -329,8 +373,7 @@
     border-bottom: 0;
   }
 
-  .at-ad-actions,
-  .at-reimburse-cta {
+  .at-ad-actions {
     flex-direction: column;
     align-items: stretch;
   }
