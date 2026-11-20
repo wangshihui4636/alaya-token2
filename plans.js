@@ -7,7 +7,7 @@
       unit: "/席/月",
       video: "不含视频模型",
       hasVideo: false,
-      benefits: ["25,000 Credits", "TPM 不保障（或 ≤2,000）", "不含视频模型"],
+      benefits: ["25,000 Credits", "共享吞吐起步", "不含视频模型"],
       pos: "个人→团队试用、流程验证；非生产主力",
     },
     {
@@ -17,7 +17,7 @@
       unit: "/席/月",
       video: "不含视频模型",
       hasVideo: false,
-      benefits: ["50,000 Credits", "TPM 5,000", "不含视频模型", "建议起购 3 席"],
+      benefits: ["50,000 Credits", "适合小团队协作", "不含视频模型", "建议起购 3 席"],
       pos: "小团队轻量协作",
     },
     {
@@ -29,7 +29,7 @@
       hasVideo: true,
       featured: true,
       badge: "主推",
-      benefits: ["100,000 Credits", "TPM 20,000 · 含文本/视频/图片", "含视频额度 ¥200（增强+生成+超分）"],
+      benefits: ["100,000 Credits", "含文本/视频/图片", "含视频额度 ¥200（增强+生成+超分）"],
       pos: "研发/数据默认主力席位",
     },
     {
@@ -39,7 +39,7 @@
       unit: "/席/月",
       video: "含视频额度 ¥500",
       hasVideo: true,
-      benefits: ["250,000 Credits", "共享吞吐上限 TPM 50,000", "含文本/视频/图片", "含视频额度 ¥500（增强+生成+超分）"],
+      benefits: ["250,000 Credits", "高吞吐共享容量", "含文本/视频/图片", "含视频额度 ¥500（增强+生成+超分）"],
       pos: "重度核心 / 内容生产席位",
     },
   ];
@@ -188,62 +188,6 @@
       });
     }
 
-    const buyTpm = document.getElementById("buyTpm");
-    const tpmTiers = document.getElementById("tpmTiers");
-    const tpmTierDesc = document.getElementById("tpmTierDesc");
-    const tpmTierFit = document.getElementById("tpmTierFit");
-    const tpmSummary = document.getElementById("tpmSummary");
-    const TPM_META = {
-      day: {
-        label: "按天预付费",
-        desc: "预留规格 · 用不满也收；适合已知高峰窗口",
-        fit: "发布日 / 营销峰值 / 批处理",
-      },
-      hour: {
-        label: "按小时后付费",
-        desc: "弹性启用 · 按实际开启计费；适合突发扩容",
-        fit: "临时压测 / 短时活动",
-      },
-      month: {
-        label: "月保障包",
-        desc: "价 ≈ 备机成本 ÷ 利用率 × 1.3 × (1+毛利)",
-        fit: "长期生产 / 专属高优吞吐",
-      },
-    };
-    let selectedTpmTier = "day";
-
-    function syncTpmBuy() {
-      const meta = TPM_META[selectedTpmTier] || TPM_META.day;
-      if (tpmTierDesc) tpmTierDesc.textContent = meta.desc;
-      if (tpmTierFit) tpmTierFit.textContent = meta.fit;
-      if (tpmSummary) {
-        tpmSummary.textContent = `已选 · ${meta.label} · 与团队席位叠加购买`;
-      }
-      if (buyTpm) {
-        buyTpm.href = `index.html#login?edition=tpm&tier=${encodeURIComponent(selectedTpmTier)}`;
-      }
-    }
-
-    if (tpmTiers) {
-      tpmTiers.addEventListener("click", (e) => {
-        const btn = e.target.closest(".topup-amount");
-        if (!btn) return;
-        selectedTpmTier = btn.dataset.tier || "day";
-        tpmTiers.querySelectorAll(".topup-amount").forEach((el) => {
-          el.classList.toggle("active", el === btn);
-        });
-        syncTpmBuy();
-        notify(`已选择 · ${(TPM_META[selectedTpmTier] || TPM_META.day).label}`);
-      });
-    }
-
-    if (buyTpm) {
-      buyTpm.addEventListener("click", () => {
-        notify(`前往购买 TPM 保障包 · ${(TPM_META[selectedTpmTier] || TPM_META.day).label}`);
-      });
-    }
-
-    syncTpmBuy();
     renderPlans();
 
     return {
@@ -251,16 +195,6 @@
         if (!planList.some((p) => p.id === planId)) return;
         selectedPlanId = planId;
         renderPlans();
-      },
-      selectTpmTier(tier) {
-        if (!TPM_META[tier]) return;
-        selectedTpmTier = tier;
-        if (tpmTiers) {
-          tpmTiers.querySelectorAll(".topup-amount").forEach((el) => {
-            el.classList.toggle("active", el.dataset.tier === tier);
-          });
-        }
-        syncTpmBuy();
       },
     };
   }
@@ -436,8 +370,8 @@
           <a class="btn btn-primary" href="#subscribe" data-apply-plan="${plan.id}">去购买 · ${plan.name}</a>
           ${
             needTpm
-              ? `<a class="btn btn-ghost" href="#tpm" data-apply-tpm="${tpmTier}">购买 TPM 保障包</a>`
-              : `<a class="btn btn-ghost" href="#tpm">查看 TPM 保障包</a>`
+              ? `<a class="btn btn-ghost" href="#subscribe">了解更多</a>`
+              : `<a class="btn btn-ghost" href="#subscribe">了解更多</a>`
           }
         </div>
       `;
