@@ -38,66 +38,80 @@
   </header>
 
   <main>
-    <!-- 1. 首屏：去 Slogan，直接展示新上新模型 -->
-    <section class="at-ad-hero" id="hero" aria-labelledby="hero-title">
-      <div class="at-ad-inner">
-        <div class="at-ad-main">
-          <div class="at-ad-copy">
-            <h1 id="hero-title">
-              <span class="grad">Kimi 3.0 Pro</span><br />
-              首发上线 Token Plan
-            </h1>
-            <p class="lead">
-              长文推理、编程更强。新模型直接上线可试，个人额度加赠，企业套餐限时报名。
-            </p>
-            <div class="at-ad-actions">
-              <a class="btn btn-primary" href="#experience">
-                立即体验
-                <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
-              </a>
-              <a class="btn btn-ghost" href="#subscribe">立即抢购</a>
-              <a class="btn btn-ghost" href="#campaign">元创优惠</a>
-            </div>
-          </div>
-          <div class="at-ad-visual" aria-hidden="true">
-            <span class="at-ad-beam"></span>
-            <span class="at-ad-beam"></span>
-            <span class="at-ad-beam"></span>
-            <span class="at-ad-beam"></span>
-            <span class="at-ad-beam"></span>
-            <span class="at-ad-orb"></span>
-          </div>
+    <!-- 1. 首屏：居中标题 + 蓝色大卡轮播（参考 Token Plan 广告首屏） -->
+    <section class="at-hero-qwen" id="hero" aria-labelledby="hero-title">
+      <div class="at-hero-qwen-inner">
+        <div class="at-hero-qwen-copy">
+          <h1 id="hero-title">Kimi 3.0 Pro 已就位!</h1>
+          <p class="at-hero-qwen-lead">
+            新客首购 Token Plan 低至 5 折，模型与 Agent 能力一次配齐，多档套餐灵活选。
+          </p>
+          <a class="at-hero-pill" href="#experience">立即体验</a>
         </div>
 
-        <div class="at-ad-strip" role="list">
-          <a href="#experience" role="listitem">
-            <span class="at-ad-ico">Pro</span>
-            <span>
-              <strong>Kimi 3.0 Pro</strong>
-              <em>长文推理 · 编程协作 · 首发体验</em>
-            </span>
-          </a>
-          <a href="#experience" role="listitem">
-            <span class="at-ad-ico">5.5</span>
-            <span>
-              <strong>Seedream 5.5</strong>
-              <em>图像生成升级 · 细节更稳</em>
-            </span>
-          </a>
-          <a href="#experience" role="listitem">
-            <span class="at-ad-ico">DS</span>
-            <span>
-              <strong>DeepSeek 系列</strong>
-              <em>推理编程 · 性价比之选</em>
-            </span>
-          </a>
-          <a href="#campaign" role="listitem">
-            <span class="at-ad-ico">元</span>
-            <span>
-              <strong>元创计划进行中</strong>
-              <em>额度加赠 · 限时报名</em>
-            </span>
-          </a>
+        <div class="at-hero-banner" id="heroBanner" data-index="0">
+          <button class="at-hero-nav at-hero-prev" type="button" aria-label="上一张" id="heroPrev">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+          </button>
+          <button class="at-hero-nav at-hero-next" type="button" aria-label="下一张" id="heroNext">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+          </button>
+
+          <div class="at-hero-slides">
+            <article class="at-hero-slide is-active" data-slide="0">
+              <div class="at-float at-float-side" aria-hidden="true">
+                <span class="at-float-label">Reasoning</span>
+                <div class="at-float-dots">
+                  <i></i><i></i><i></i><i></i><i></i><i></i>
+                </div>
+              </div>
+              <div class="at-float at-float-main">
+                <span class="at-float-glow" aria-hidden="true"></span>
+                <strong>Kimi<br />3.0 PRO</strong>
+              </div>
+              <div class="at-float at-float-chat" aria-hidden="true">
+                <span>What do you want to create?</span>
+              </div>
+            </article>
+
+            <article class="at-hero-slide" data-slide="1" hidden>
+              <div class="at-float at-float-side" aria-hidden="true">
+                <span class="at-float-label">Image</span>
+                <div class="at-float-dots at-float-dots-warm">
+                  <i></i><i></i><i></i><i></i><i></i><i></i>
+                </div>
+              </div>
+              <div class="at-float at-float-main at-float-main-alt">
+                <span class="at-float-glow" aria-hidden="true"></span>
+                <strong>Seedream<br />5.5</strong>
+              </div>
+              <div class="at-float at-float-chat" aria-hidden="true">
+                <span>Generate a 4K product shot</span>
+              </div>
+            </article>
+
+            <article class="at-hero-slide" data-slide="2" hidden>
+              <div class="at-float at-float-side" aria-hidden="true">
+                <span class="at-float-label">Code</span>
+                <div class="at-float-dots at-float-dots-cool">
+                  <i></i><i></i><i></i><i></i><i></i><i></i>
+                </div>
+              </div>
+              <div class="at-float at-float-main at-float-main-ds">
+                <span class="at-float-glow" aria-hidden="true"></span>
+                <strong>DeepSeek<br />系列</strong>
+              </div>
+              <div class="at-float at-float-chat" aria-hidden="true">
+                <span>Refactor this Python service</span>
+              </div>
+            </article>
+          </div>
+
+          <div class="at-hero-dots" role="tablist" aria-label="轮播指示">
+            <button type="button" class="is-active" role="tab" aria-selected="true" data-dot="0" aria-label="第 1 张"></button>
+            <button type="button" role="tab" aria-selected="false" data-dot="1" aria-label="第 2 张"></button>
+            <button type="button" role="tab" aria-selected="false" data-dot="2" aria-label="第 3 张"></button>
+          </div>
         </div>
       </div>
     </section>
@@ -526,5 +540,40 @@
   <div id="login" hidden aria-hidden="true"></div>
   <script src="plans.js"></script>
   <script src="main.js"></script>
+  <script>
+    (function () {
+      const root = document.getElementById("heroBanner");
+      if (!root) return;
+      const slides = Array.from(root.querySelectorAll(".at-hero-slide"));
+      const dots = Array.from(root.querySelectorAll("[data-dot]"));
+      let i = 0;
+      let timer;
+
+      function go(n) {
+        i = (n + slides.length) % slides.length;
+        slides.forEach((s, idx) => {
+          const on = idx === i;
+          s.classList.toggle("is-active", on);
+          s.hidden = !on;
+        });
+        dots.forEach((d, idx) => {
+          const on = idx === i;
+          d.classList.toggle("is-active", on);
+          d.setAttribute("aria-selected", on ? "true" : "false");
+        });
+        root.dataset.index = String(i);
+      }
+
+      function restart() {
+        clearInterval(timer);
+        timer = setInterval(() => go(i + 1), 5200);
+      }
+
+      document.getElementById("heroPrev")?.addEventListener("click", () => { go(i - 1); restart(); });
+      document.getElementById("heroNext")?.addEventListener("click", () => { go(i + 1); restart(); });
+      dots.forEach((d) => d.addEventListener("click", () => { go(Number(d.dataset.dot)); restart(); }));
+      restart();
+    })();
+  </script>
 </body>
 </html>
