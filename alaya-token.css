@@ -311,9 +311,29 @@
 
 .at-cap-tools {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: 1fr 1fr;
   gap: 18px;
   align-items: start;
+}
+
+.at-cap-tools .at-cap-list::before,
+.at-tools-mini::before {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 4px;
+  grid-column: 1 / -1;
+}
+
+.at-cap-tools .at-cap-list::before {
+  content: "Models";
+}
+
+.at-tools-mini::before {
+  content: "Tools";
 }
 
 /* —— 3. Experience entry —— */
