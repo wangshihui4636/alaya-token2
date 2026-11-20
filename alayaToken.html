@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
@@ -25,7 +25,7 @@
       Alaya Token
     </a>
     <nav class="header-nav" aria-label="主导航">
-      <a href="#experience">模型体验</a>
+      <a href="#experience">模型能力</a>
       <a href="#subscribe">套餐</a>
       <a class="btn btn-primary" href="#login">
         登录
@@ -219,47 +219,63 @@
       </div>
     </section>
 
-    <!-- 3. 模型体验入口 -->
+    <!-- 3. 模型能力图文展示 -->
     <section class="section at-experience-section" id="experience" aria-labelledby="experience-title">
       <div class="section-inner">
-        <p class="section-label reveal">Try Now</p>
-        <h2 class="section-title reveal" id="experience-title">模型体验入口</h2>
-        <p class="section-desc reveal">选一条路径立刻上手：对话、视频生成或 API 试跑，先体验再决定订阅。</p>
+        <p class="section-label reveal">Models</p>
+        <h2 class="section-title reveal" id="experience-title">当前模型能力</h2>
+        <p class="section-desc reveal">以图文直达能力与适用场景，不必跳转广场或对话台。</p>
 
-        <div class="at-experience-grid reveal">
-          <a class="at-experience-card is-featured" href="#login">
-            <span class="at-experience-badge">首发</span>
-            <h3>Kimi 3.0 Pro 对话体验</h3>
-            <p>长文推理与编程协作更强。适合研发、办公与复杂任务试跑。</p>
-            <span class="at-experience-cta">
-              进入对话台
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
-            </span>
-          </a>
-          <a class="at-experience-card" href="#login">
-            <h3>文本对话体验</h3>
-            <p>Kimi / GLM / DeepSeek 等一键切换，编程、办公、推理同入口。</p>
-            <span class="at-experience-cta">
-              打开对话台
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
-            </span>
-          </a>
-          <a class="at-experience-card" href="models.html">
-            <h3>模型广场浏览</h3>
-            <p>按文本 / 视频筛选对比，挑好主力模型再充值或订阅。</p>
-            <span class="at-experience-cta">
-              浏览全部模型
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
-            </span>
-          </a>
-          <a class="at-experience-card" href="#login">
-            <h3>API 快速试跑</h3>
-            <p>兼容 OpenAI / Anthropic 风格接口，拿密钥即可对接现有工具链。</p>
-            <span class="at-experience-cta">
-              获取密钥
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
-            </span>
-          </a>
+        <div class="at-model-show reveal">
+          <article class="at-model-show-card">
+            <div class="at-model-visual at-model-visual-kimi" aria-hidden="true">
+              <span class="at-model-mark">K3</span>
+              <span class="at-model-beam"></span>
+              <span class="at-model-beam"></span>
+              <span class="at-model-beam"></span>
+            </div>
+            <div class="at-model-copy">
+              <h3>Kimi K3</h3>
+              <p>长上下文旗舰，复杂推理、编程协作与 Agent 长链路编排更稳，适合多文档与研发深读场景。</p>
+              <ul>
+                <li>超长上下文理解</li>
+                <li>推理 / 编程 / Agent</li>
+                <li>多文档整理与编排</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="at-model-show-card">
+            <div class="at-model-visual at-model-visual-glm" aria-hidden="true">
+              <span class="at-model-mark">5.2</span>
+              <span class="at-model-orb"></span>
+            </div>
+            <div class="at-model-copy">
+              <h3>GLM-5.2</h3>
+              <p>通用对话与办公创作升级版，文案、分析、助手类任务响应快，适合团队日常主力调用。</p>
+              <ul>
+                <li>办公创作与文案</li>
+                <li>分析问答更稳</li>
+                <li>助手类高频任务</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="at-model-show-card">
+            <div class="at-model-visual at-model-visual-ds" aria-hidden="true">
+              <span class="at-model-mark">V4</span>
+              <span class="at-model-grid"></span>
+            </div>
+            <div class="at-model-copy">
+              <h3>DeepSeek-V4 Flash</h3>
+              <p>高性价比推理与代码加速档，批量任务与高频调用更省，适合试跑、压测与生产备份。</p>
+              <ul>
+                <li>高性价比推理</li>
+                <li>代码加速生成</li>
+                <li>批量 / 备份调用</li>
+              </ul>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -283,7 +299,7 @@
               </a>
               <div class="hub-mini-links">
                 <a href="#login">咨询是否符合资格</a>
-                <a href="#experience">先去体验</a>
+                <a href="#experience">查看模型能力</a>
               </div>
             </div>
           </aside>
@@ -433,7 +449,7 @@
           <p>先试 Kimi 3.0 Pro，再按场景选套餐完成订阅。</p>
           <div class="hub-intro-actions">
             <a class="btn btn-primary" href="#experience">
-              去体验模型
+              查看模型能力
               <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
             </a>
             <div class="hub-mini-links">
@@ -454,7 +470,7 @@
       </a>
       <nav class="footer-nav" aria-label="页脚">
         <a href="#recommend">智能推荐</a>
-        <a href="#experience">模型体验</a>
+        <a href="#experience">模型能力</a>
         <a href="#campaign">元创计划</a>
         <a href="#subscribe">套餐</a>
         <a href="#reliability">安全</a>
